@@ -32,15 +32,10 @@ class ApiAuthController extends Controller
             }  
             else if ($cek->roles_id == '3')  
             {
-                $datauser=User::with('get_pasien')->find($cek->id);
-
+                $datauser=User::find($cek->id);
                 return $data = [
-                    'status' => true,
-                    'username' => $cek->name,
-                    'email'=>$cek->email,
-                    'roles_id'=>$cek->roles_id,
-                    'userid'=>$datauser->get_pasien->id, 
-                 
+                    'status' => 'success',
+                    'data' => [$cek],
                 ];
             }
            
@@ -65,28 +60,13 @@ class ApiAuthController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->roles_id = 3;
-        $user->email = $request->email;
+        $user->email = $request->email;        
         $user->password = Hash::make($request->password);        
+        $user->alamat= $request->alamat;
+        $user->nohp= $request->nohp;
         $user->save();
         $id = $user->id;
 
-        $Pasien = new Pasien();
-        $Pasien->userid = $id;
-        $Pasien->namapasien = $request->name;
-        $Pasien->gender= $request->gender;
-        $Pasien->address= $request->address;
-        $Pasien->tempat= $request->tempat;
-        $Pasien->birthday= $request->birthday;
-        $Pasien->agama= $request->agama;  
-        $Pasien->pekerjaan= $request->pekerjaan;  
-        $Pasien->status= 'aktif';
-        $Pasien->idkartu= $request->idkartu;
-        $Pasien->nokartu= $request->nokartu;
-        $Pasien->nohp= $request->nohp;
-        $Pasien->kelurahan= $request->kelurahan;
-        $Pasien->statuskeluarga= $request->statuskeluarga;
-        
-        $Pasien->save();
         return $data = [
             'status' => true,
             'id' => $id,

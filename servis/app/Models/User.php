@@ -72,12 +72,8 @@ class User extends Authenticatable
     {
         return (strtolower($role)==strtolower($this->have_role->role_name)) ? true : false;
     }
-    public function get_pasien()
-    {
-        return $this->hasOne(Pasien::class, 'userid', 'id');
-    }
-    public function get_dokter()
-    {
-        return $this->hasOne(Dokter::class, 'userid', 'id');
-    }
+    // public function getmekanik()
+    // {
+    //     return $this->hasOne(Pasien::class, 'userid', 'id');
+    // }
 }
