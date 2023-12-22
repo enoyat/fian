@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import '../models/register.dart';
 import 'login_page.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class RegisterMotor extends StatefulWidget {
+  const RegisterMotor({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<RegisterMotor> createState() => _RegisterMotorState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterMotorState extends State<RegisterMotor> {
   
 
   final _formKey = GlobalKey<FormState>();
@@ -43,15 +43,25 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Registrasi Motor',
+          textAlign: TextAlign.left,
+          style: TextStyle(color: Color.fromARGB(255, 235, 231, 231)),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                
+              },
+              icon: const Icon(Icons.refresh))
+        ],),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: Column(
             children: [
-              const SizedBox(height: 40),
-              const Center(
-                child: Text('Register', style: TextStyle(fontSize: 20)),
-              ),
+             
               const SizedBox(height: 20),
               Container(
                 margin: const EdgeInsets.only(left: 20, right: 20),
@@ -59,7 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: username,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Nama',
+                    labelText: 'Plat',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {

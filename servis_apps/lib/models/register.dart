@@ -6,34 +6,16 @@ class RegisterModel {
   final String name;
   final String email;
   final String gender;
-  final String address;
-  final String birthday;
-  final String tempat;
-  final String agama;
-  final String pekerjaan;
-  final String status;
-  final String idkartu;
-  final String nokartu;
+  final String alamat;
   final String nohp;
-  final String kelurahan;
-  final String statuskeluarga;
   final String password;
   RegisterModel({
     this.id,
     required this.name,
     required this.email,
     required this.gender,
-    required this.address,
-    required this.birthday,
-    required this.tempat,
-    required this.agama,
-    required this.pekerjaan,
-    required this.status,
-    required this.idkartu,
-    required this.nokartu,
+    required this.alamat,
     required this.nohp,
-    required this.kelurahan,
-    required this.statuskeluarga,
     required this.password,
   });
 
@@ -43,17 +25,8 @@ class RegisterModel {
       'name': name,
       'email': email,
       'gender': gender,
-      'address': address,
-      'birthday': birthday,
-      'tempat': tempat,
-      'agama': agama,
-      'pekerjaan': pekerjaan,
-      'status': status,
-      'idkartu': idkartu,
-      'nokartu': nokartu,
+      'alamat': alamat,
       'nohp': nohp,
-      'kelurahan': kelurahan,
-      'statuskeluarga': statuskeluarga,
       'password': password,
     };
   }
@@ -64,17 +37,8 @@ class RegisterModel {
       name: map['name'] as String,
       email: map['email'] as String,
       gender: map['gender'] as String,
-      address: map['address'] as String,
-      birthday: map['birthday'] as String,
-      tempat: map['tempat'] as String,
-      agama: map['agama'] as String,
-      pekerjaan: map['pekerjaan'] as String,
-      status: map['status'] as String,
-      idkartu: map['idkartu'] as String,
-      nokartu: map['nokartu'] as String,
+      alamat: map['alamat'] as String,
       nohp: map['nohp'] as String,
-      kelurahan: map['kelurahan'] as String,
-      statuskeluarga: map['statuskeluarga'] as String,
       password: map['password'] as String,
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:servis_apps/screen/register_motor.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/jadwal.dart';
@@ -18,8 +19,8 @@ class _HomePageState extends State<HomePage> {
   int selectedindex = 0;
   int iddokumen = 0;
   bool isLoading = false;
-  String? username="";
-  String? email="";
+  String? username = "";
+  String? email = "";
   int? userid = 0;
 
   List<Jadwal> jadwal = [];
@@ -37,6 +38,12 @@ class _HomePageState extends State<HomePage> {
         );
       }));
     } else if (index == 2) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return HistoryDonePage(
+          userid: userid!,
+        );
+      }));
+    } else if (index == 3) {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       await preferences.clear();
       if (!mounted) return;
@@ -67,15 +74,14 @@ class _HomePageState extends State<HomePage> {
       isLoading = true;
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    Future.delayed( const Duration(seconds: 2));
+    Future.delayed(const Duration(seconds: 2));
     setState(() {
       userid = prefs.getInt('userid');
       username = prefs.getString('username');
       email = prefs.getString('email');
-      
-      isLoading= false;
+
+      isLoading = false;
     });
-    
   }
 
   @override
@@ -91,10 +97,69 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 20,
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: MenuBar(
+                    children: <Widget>[
+                      SubmenuButton(
+                        menuChildren: <Widget>[
+                          MenuItemButton(
+                            onPressed: () {
+                              showAboutDialog(
+                                context: context,
+                                applicationName: 'MenuBar Sample',
+                                applicationVersion: '1.0.0',
+                              );
+                            },
+                            child: const MenuAcceleratorLabel('&Motor'),
+                          ),
+                          MenuItemButton(
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return const RegisterMotor();
+                                },
+                              ));
+                            },
+                            child:
+                                const MenuAcceleratorLabel('&Registrasi Motor'),
+                          ),
+                        ],
+                        child: const MenuAcceleratorLabel('&Motor'),
+                      ),
+                      SubmenuButton(
+                        menuChildren: <Widget>[
+                          MenuItemButton(
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Magnify!'),
+                                ),
+                              );
+                            },
+                            child: const MenuAcceleratorLabel('&Reservasi'),
+                          ),
+                          MenuItemButton(
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Minify!'),
+                                ),
+                              );
+                            },
+                            child:
+                                const MenuAcceleratorLabel('&History Layanan'),
+                          ),
+                        ],
+                        child: const MenuAcceleratorLabel('&Layanan'),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
             Container(
               margin: const EdgeInsets.only(top: 5),
@@ -102,7 +167,7 @@ class _HomePageState extends State<HomePage> {
               width: double.infinity,
               child: Card(
                 margin: const EdgeInsets.only(top: 5, bottom: 5),
-                color: Color.fromARGB(255, 3, 68, 17),
+                color: const Color.fromARGB(255, 3, 68, 17),
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -125,8 +190,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         textAlign: TextAlign.center),
                     const SizedBox(height: 5),
-                    isLoading 
-                        ? const CircularProgressIndicator() 
+                    isLoading
+                        ? const CircularProgressIndicator()
                         : Text("ID :$userid - ${username!}",
                             style: const TextStyle(
                               fontSize: 15,
@@ -139,12 +204,6 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(
               height: 20,
-            ),
-            const Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Menu Dashboard'),
-              ],
             ),
           ],
         ),
@@ -162,7 +221,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.list_alt_outlined),
-            label: 'Rekam Medis',
+            label: 'Reservasi',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.logout),
