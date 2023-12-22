@@ -40,7 +40,8 @@ class ApiReservasi extends Controller
     
     public function listreservasi($id)
     {
-        $reservasi = Reservasi::where('iduser', $id)->get();      
+       
+        $reservasi = Reservasi::join('pelayanan','reservasi.idpelayanan','=','pelayanan.idpelayanan')->where('iduser', $id)->get();      
         return Response::json($reservasi);
     }
     public function show($id){

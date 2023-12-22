@@ -1,34 +1,35 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import '../models/rekam.dart';
-import '../utils/network_manager.dart';
-import '../widget/itemdoneajuan_widget.dart';
+import 'package:servis_apps/models/reservasimodel.dart';
+import 'package:servis_apps/models/user.dart';
+import 'package:servis_apps/utils/reservasidio.dart';
+import 'package:servis_apps/widget/itemreservasi_widget.dart';
 
-class HistoryDonePage extends StatefulWidget {
-  const HistoryDonePage({
+class ListReservasiPage extends StatefulWidget {
+  const ListReservasiPage({
     Key? key,
     required this.userid,
   }) : super(key: key);
   final int userid;
 
   @override
-  State<HistoryDonePage> createState() => _HistoryDonePageState();
+  State<ListReservasiPage> createState() => _ListReservasiPageState();
 }
 
-class _HistoryDonePageState extends State<HistoryDonePage> {
-  List<Rekam> historydone = [];
+class _ListReservasiPageState extends State<ListReservasiPage> {
+  List<ReservasiModel> reservasi = [];
   bool isLoading = false;
-  int historydoneCount = 0;
+  int reservasiCount = 0;
   int userid = 0;
+  List<User> usermodel = [];
 
   void refreshData() async {
     setState(() {
       isLoading = true;
     });
-    await NetworkManager().listrekam(widget.userid).then((value) {
+    await ReservasiDio().listreservasi(widget.userid).then((value) {
       setState(() {
-        historydone = value;
-        historydoneCount = historydone.length;
+        reservasi = value;
         isLoading = false;
       });
     });
@@ -49,7 +50,7 @@ class _HistoryDonePageState extends State<HistoryDonePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'History Rekam Medis',
+          'Reservasi',
           textAlign: TextAlign.left,
           style: TextStyle(color: Colors.black),
         ),
@@ -72,7 +73,7 @@ class _HistoryDonePageState extends State<HistoryDonePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Daftar Rekam Medis',
+                'Daftar Reservasi',
                 style: textTheme.bodyText1,
               ),
             ],
@@ -82,15 +83,15 @@ class _HistoryDonePageState extends State<HistoryDonePage> {
                   child: CircularProgressIndicator(),
                 )
               : Expanded(
-                  child: historydone.isEmpty
+                  child: reservasi.isEmpty
                       ? const Center(
                           child: Text('Tidak ada item'),
                         )
                       : ListView.builder(
-                          itemCount: historydone.length,
+                          itemCount: reservasi.length,
                           itemBuilder: (context, index) {
-                            return ItemDoneWidget(
-                              rekam: historydone[index],
+                            return ItemReservasiWidget(
+                              reservasi: reservasi[index],
                               handleRefresh: refreshData,
                             );
                           }),

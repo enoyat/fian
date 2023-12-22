@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:servis_apps/screen/listreservasipage.dart';
 import 'package:servis_apps/screen/register_motor.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/jadwal.dart';
-import '../models/pendaftaramodel.dart';
-import '../utils/network_manager.dart';
-import 'listajuandone_page.dart';
 import 'login_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,8 +20,6 @@ class _HomePageState extends State<HomePage> {
   String? email = "";
   int? userid = 0;
 
-  List<Jadwal> jadwal = [];
-  List<PendaftaranModel> pendaftaranmodel = [];
 
   void _ontap(int index) async {
     if (index == 0) {
@@ -33,17 +28,11 @@ class _HomePageState extends State<HomePage> {
       }));
     } else if (index == 1) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return HistoryDonePage(
+        return ListReservasiPage(
           userid: userid!,
         );
       }));
     } else if (index == 2) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return HistoryDonePage(
-          userid: userid!,
-        );
-      }));
-    } else if (index == 3) {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       await preferences.clear();
       if (!mounted) return;
@@ -56,19 +45,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void refresh() async {
-    await NetworkManager().jadwal().then((value) {
-      setState(() {
-        jadwal = value;
-      });
-    });
-    await NetworkManager().listpendaftaran(userid!).then((value) {
-      setState(() {
-        pendaftaranmodel = value;
-      });
-    });
-  }
-
+  
   void _setter() async {
     setState(() {
       isLoading = true;
@@ -87,7 +64,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _setter();
-    refresh();
+    
     super.initState();
   }
 

@@ -69,51 +69,26 @@ class _RegisterMotorState extends State<RegisterMotor> {
                   controller: username,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Plat',
+                    labelText: 'No Polisi',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your Plat';
+                      return 'Please enter your Nopolisi';
                     }
                     return null;
                   },
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(left: 20, right: 20),
-                child: Row(
-                  children: [
-                    const Text('Male'),
-                    Radio(
-                        value: "male",
-                        groupValue: gender,
-                        onChanged: (value) {
-                          setState(() {
-                            gender = value.toString();
-                          });
-                        }),
-                    const SizedBox(height: 10),
-                    const Text('Female'),
-                    Radio(
-                        value: "female",
-                        groupValue: gender,
-                        onChanged: (value) {
-                          setState(() {
-                            gender = value.toString();
-                          });
-                        }),
-                  ],
-                ),
-              ),
+               const SizedBox(height: 20),
               Container(
                 margin: const EdgeInsets.only(left: 20, right: 20),
                 child: TextFormField(
                   controller: address,
                   decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'alamat'),
+                      border: OutlineInputBorder(), labelText: 'Merk'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'alamat';
+                      return 'Merk';
                     }
                     return null;
                   },
@@ -128,48 +103,17 @@ class _RegisterMotorState extends State<RegisterMotor> {
                   controller: nohp,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'nohp'),
+                      border: OutlineInputBorder(), labelText: 'Jenis Merk'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'nohp';
+                      return 'Jenis Merk';
                     }
                     return null;
                   },
                 ),
               ),
              
-              const SizedBox(height: 20),
-              Container(
-                margin: const EdgeInsets.only(left: 20, right: 20),
-                child: TextFormField(
-                  controller: email,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'email'),
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                margin: const EdgeInsets.only(left: 20, right: 20),
-                child: TextFormField(
-                  controller: password,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'password'),
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    return null;
-                  },
-                ),
-              ),
+             
               const SizedBox(height: 20),
               Container(
                 margin: const EdgeInsets.only(left: 20, right: 20),
@@ -215,7 +159,7 @@ class _RegisterMotorState extends State<RegisterMotor> {
                           });
                         }
                       },
-                      child: const Text('Daftar'),
+                      child: const Text('Simpan'),
                     ),
                     const SizedBox(width: 20),
                     ElevatedButton(

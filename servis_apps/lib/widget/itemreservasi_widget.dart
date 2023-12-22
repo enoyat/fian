@@ -1,14 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:servis_apps/models/history.dart';
+import 'package:servis_apps/models/reservasimodel.dart';
 
-class ItemWidget extends StatelessWidget {
-  const ItemWidget({
+class ItemReservasiWidget extends StatelessWidget {
+  const ItemReservasiWidget({
     Key? key,
-    required this.history,
+    required this.reservasi,
     required this.handleRefresh,
   }) : super(key: key);
-  final History history;
+  final ReservasiModel reservasi;
   final Function handleRefresh;
 
   @override
@@ -22,14 +22,11 @@ class ItemWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(history.namadokumen!),
+                Text(reservasi.idreservasi.toString()),
                 const SizedBox(
                   height: 5,
                 ),
-                Text(history.status,
-                    style: const TextStyle(
-                      color: Colors.red,
-                    )),
+                Text(reservasi.idmekanik.toString()), 
               ],
             ),
           ),

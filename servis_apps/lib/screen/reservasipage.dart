@@ -1,27 +1,24 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:servis_apps/models/pendaftaran.dart';
 import 'package:flutter/material.dart';
+import 'package:servis_apps/models/reservasimodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:servis_apps/screen/home_page.dart';
 
-import '../models/dokumen.dart';
-import '../models/jadwal.dart';
-import '../models/transaction.dart';
 import '../utils/network_manager.dart';
 
-class AjuanPage extends StatefulWidget {
-  const AjuanPage({
+class ReservasiPage extends StatefulWidget {
+  const ReservasiPage({
     Key? key,
-    required this.jadwal,
+    required this.rerservasi,
   }) : super(key: key);
-  final Jadwal jadwal;
+  final ReservasiModel rerservasi;
 
   @override
-  State<AjuanPage> createState() => _AjuanPageState();
+  State<ReservasiPage> createState() => _ReservasiPageState();
 }
 
-class _AjuanPageState extends State<AjuanPage> {
+class _ReservasiPageState extends State<ReservasiPage> {
   bool isLoading = false;
   bool isCheck = true;
   int userid = 0;
@@ -47,7 +44,7 @@ class _AjuanPageState extends State<AjuanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pendaftaran'),
+        title: const Text('Reservasi'),
       ),
       body: SingleChildScrollView(
         child: Column(children: [
@@ -57,20 +54,14 @@ class _AjuanPageState extends State<AjuanPage> {
               : Column(
                   children: [
                     const SizedBox(height: 20),
-                    Text('ID Pasien : $userid'),
-                    const SizedBox(height: 20),
-                    Text('Kode Jadwal  : ${widget.jadwal.id!}',
-                        style: const TextStyle(fontSize: 20)),
-                    Text('Tanggal Periksa : ${widget.jadwal.tanggal}',
-                        style: const TextStyle(fontSize: 20)),
-                    Text('Jam Periksa : ${widget.jadwal.jam}',
-                        style: const TextStyle(fontSize: 20)),
+                    Text('ID : $userid'),
+                    const SizedBox(height: 20),                    
                     Form(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            Text('Nama Dokter : ${widget.jadwal.namadokter}'),
+                            Text('No Pelayanan : ${widget.jadwal.namadokter}'),
                             const SizedBox(height: 20),
                             CheckboxListTile(
                               title: const Text(
