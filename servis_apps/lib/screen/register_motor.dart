@@ -73,7 +73,7 @@ class _RegisterMotorState extends State<RegisterMotor> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your Name';
+                      return 'Please enter your Plat';
                     }
                     return null;
                   },
