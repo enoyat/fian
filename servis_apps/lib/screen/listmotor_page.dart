@@ -1,35 +1,33 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:servis_apps/models/reservasimodel.dart';
-import 'package:servis_apps/models/user.dart';
-import 'package:servis_apps/utils/reservasidio.dart';
-import 'package:servis_apps/widget/itemreservasi_widget.dart';
+import 'package:servis_apps/models/motormodel.dart';
+import 'package:servis_apps/utils/motor_dio.dart';
+import 'package:servis_apps/widget/itemmotor_widget.dart';
 
-class ListReservasiPage extends StatefulWidget {
-  const ListReservasiPage({
+class ListMotorPage extends StatefulWidget {
+  const ListMotorPage({
     Key? key,
     required this.userid,
   }) : super(key: key);
   final int userid;
 
   @override
-  State<ListReservasiPage> createState() => _ListReservasiPageState();
+  State<ListMotorPage> createState() => _ListMotorPageState();
 }
 
-class _ListReservasiPageState extends State<ListReservasiPage> {
-  List<ReservasiModel> reservasi = [];
+class _ListMotorPageState extends State<ListMotorPage> {
+  List<Motor> motor = [];
   bool isLoading = false;
-  int reservasiCount = 0;
+  int motorCount = 0;
   int userid = 0;
-  List<User> usermodel = [];
 
   void refreshData() async {
     setState(() {
       isLoading = true;
     });
-    await ReservasiDio().listreservasi(widget.userid).then((value) {
+    await MotorDio().listmotor(widget.userid).then((value) {
       setState(() {
-        reservasi = value;
+        motor = value;
         isLoading = false;
       });
     });
@@ -49,7 +47,7 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Reservasi',
+          'motor',
           textAlign: TextAlign.left,
           style: TextStyle(color: Colors.black),
         ),
@@ -72,7 +70,7 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:  [
               Text(
-                'Daftar Reservasi'
+                'Daftar motor'
               ),
             ],
           ),
@@ -81,15 +79,16 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
                   child: CircularProgressIndicator(),
                 )
               : Expanded(
-                  child: reservasi.isEmpty
+                  child: motor.isEmpty
                       ? const Center(
                           child: Text('Tidak ada item'),
                         )
                       : ListView.builder(
-                          itemCount: reservasi.length,
+                          itemCount: motor.length,
                           itemBuilder: (context, index) {
-                            return ItemReservasiWidget(
-                              reservasi: reservasi[index],
+                            return ItemMotorWidget(
+                              
+                              motor: motor[index],
                               handleRefresh: refreshData,
                             );
                           }),

@@ -1,12 +1,7 @@
 import 'package:servis_apps/screen/login_page.dart';
-import 'package:servis_apps/screen/lupapassword.dart';
-import 'package:servis_apps/screen/register_page.dart';
 import 'package:servis_apps/utils/customer_dio.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../utils/network_manager.dart';
-import 'home_page.dart';
 
 class ResetPage extends StatefulWidget {
   const ResetPage({super.key});

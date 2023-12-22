@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class MotorModel {
-  final int idmotor;
+class Motor {
+  final int? idmotor;
   final int iduser;
   final String nopolisi;
-  final String idmerk;
+  final int idmerk;
   final String jenismerk;
-  MotorModel({
-    required this.idmotor,
+  Motor({
+    this.idmotor,
     required this.iduser,
     required this.nopolisi,
     required this.idmerk,
@@ -25,17 +25,17 @@ class MotorModel {
     };
   }
 
-  factory MotorModel.fromMap(Map<String, dynamic> map) {
-    return MotorModel(
-      idmotor: map['idmotor'] as int,
+  factory Motor.fromMap(Map<String, dynamic> map) {
+    return Motor(
+      idmotor: map['idmotor'] != null ? map['idmotor'] as int : null,
       iduser: map['iduser'] as int,
       nopolisi: map['nopolisi'] as String,
-      idmerk: map['idmerk'] as String,
+      idmerk: map['idmerk'] as int,
       jenismerk: map['jenismerk'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory MotorModel.fromJson(String source) => MotorModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Motor.fromJson(String source) => Motor.fromMap(json.decode(source) as Map<String, dynamic>);
 }

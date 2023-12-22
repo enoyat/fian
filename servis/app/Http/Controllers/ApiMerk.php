@@ -36,9 +36,9 @@ class ApiMerk extends Controller
 
     }
     
-    public function listmerk($id)
+    public function listmerk()
     {
-        $motor = Merk::where('iduser', $id)->get();      
+        $motor = Merk::get();      
         return Response::json($motor);
     }
     public function show($id){

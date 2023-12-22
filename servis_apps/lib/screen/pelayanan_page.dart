@@ -7,18 +7,18 @@ import 'package:servis_apps/utils/motor_dio.dart';
 
 
 
-class RegisterMotor extends StatefulWidget {
-  const RegisterMotor({
+class PelayananPage extends StatefulWidget {
+  const PelayananPage({
     Key? key,
     required this.userid,
   }) : super(key: key);
   final int userid; 
 
   @override
-  State<RegisterMotor> createState() => _RegisterMotorState();
+  State<PelayananPage> createState() => _PelayananPageState();
 }
 
-class _RegisterMotorState extends State<RegisterMotor> {
+class _PelayananPageState extends State<PelayananPage> {
   final _formKey = GlobalKey<FormState>();
   final jenismerk = TextEditingController();
   final nopolisi = TextEditingController();
@@ -66,22 +66,6 @@ class _RegisterMotorState extends State<RegisterMotor> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Container(
-              margin: const EdgeInsets.only(left: 20, right: 20),
-              child: TextFormField(
-                controller: nopolisi,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'No Polisi',
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your Nopolisi';
-                  }
-                  return null;
-                },
-              ),
-            ),
              Container(
                 margin: const EdgeInsets.only(left: 20, right: 20),
                 child: xlistmerk.isEmpty

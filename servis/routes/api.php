@@ -21,10 +21,10 @@ Route::group(['middleware' => 'check-token'], function () {
 Route::get('/kirimemail', 'App\Http\Controllers\BerandaEmailController@index');
 Route::post('gantipassword', 'App\Http\Controllers\ApiAuthController@gantipassword');
 
-Route::post('store', [ApiMotor::class, 'store']);
-Route::get('listmotor', [ApiMotor::class, 'listmotor']);
-Route::get('show/{id}', [ApiMotor::class, 'show']);
-Route::delete('delete/{id}', [ApiMotor::class, 'delete']);
+Route::post('motor/store', [ApiMotor::class, 'store']);
+Route::get('motor/listmotor/{id}', [ApiMotor::class, 'listmotor']);
+Route::get('motor/show/{id}', [ApiMotor::class, 'show']);
+Route::delete('motor/delete/{id}', [ApiMotor::class, 'delete']);
 
 Route::post('merk/store', [ApiMerk::class, 'store']);
 Route::get('merk/listmerk', [ApiMerk::class, 'listmerk']);

@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class MerkModel {
+class Merkmodel {
   final int idmerk;
   final String jenismerk;
-  MerkModel({
+  Merkmodel({
     required this.idmerk,
     required this.jenismerk,
   });
@@ -16,8 +16,8 @@ class MerkModel {
     };
   }
 
-  factory MerkModel.fromMap(Map<String, dynamic> map) {
-    return MerkModel(
+  factory Merkmodel.fromMap(Map<String, dynamic> map) {
+    return Merkmodel(
       idmerk: map['idmerk'] as int,
       jenismerk: map['jenismerk'] as String,
     );
@@ -25,5 +25,5 @@ class MerkModel {
 
   String toJson() => json.encode(toMap());
 
-  factory MerkModel.fromJson(String source) => MerkModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Merkmodel.fromJson(String source) => Merkmodel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

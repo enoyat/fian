@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:servis_apps/screen/register_motor.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import '../utils/network_manager.dart';
 import 'listreservasipage.dart';
 import 'login_page.dart';
 
@@ -95,11 +93,7 @@ class _AdminPageState extends State<AdminPage> {
                           ),
                           MenuItemButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) {
-                                  return const RegisterMotor();
-                                },
-                              ));
+                             
                             },
                             child:
                                 const MenuAcceleratorLabel('&Registrasi Motor'),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:servis_apps/screen/listmotor_page.dart';
 import 'package:servis_apps/screen/listreservasipage.dart';
+import 'package:servis_apps/screen/pelayanan_page.dart';
 import 'package:servis_apps/screen/register_motor.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -85,11 +87,16 @@ class _HomePageState extends State<HomePage> {
                         menuChildren: <Widget>[
                           MenuItemButton(
                             onPressed: () {
-                              showAboutDialog(
-                                context: context,
-                                applicationName: 'MenuBar Sample',
-                                applicationVersion: '1.0.0',
-                              );
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return  ListMotorPage(userid: userid!);
+                                },
+                              ));
+                              // showAboutDialog(
+                              //   context: context,
+                              //   applicationName: 'MenuBar Sample',
+                              //   applicationVersion: '1.0.0',
+                              // );
                             },
                             child: const MenuAcceleratorLabel('&Motor'),
                           ),
@@ -97,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context) {
-                                  return const RegisterMotor();
+                                  return  RegisterMotor(userid: userid!);
                                 },
                               ));
                             },
@@ -111,11 +118,11 @@ class _HomePageState extends State<HomePage> {
                         menuChildren: <Widget>[
                           MenuItemButton(
                             onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Magnify!'),
-                                ),
-                              );
+                                Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return  PelayananPage(userid: userid!);
+                                },
+                              ));
                             },
                             child: const MenuAcceleratorLabel('&Reservasi'),
                           ),

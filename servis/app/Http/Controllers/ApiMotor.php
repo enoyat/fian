@@ -7,29 +7,28 @@ use App\Models\Motor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Validator;
 
 class ApiMotor extends Controller
 {
 
     public function store(Request $request)
     {
-        $validator_unique = Validator::make($request->all(), [
-            'plat' => 'required|unique:motor|nopolisi',
-        ]);
-        if ($validator_unique->fails()) {
+        $ceknopol=Motor::where('nopolisi',$request->nopolisi)->first();
+        if($ceknopol){
             return $data = [
                 'status' => false,
-                'message' => 'NoPol sudah terdaftar',
+                'message' => 'Nomor Polisi Sudah Terdaftar',
             ];
-        }
+        }    
+        
         $motor = new Motor();
-        $motor->iduser = $request->userid;
-        $motor->nopolisi = $request->userid;
+        $motor->iduser = $request->iduser;
+        $motor->nopolisi = $request->nopolisi;
         $motor->idmerk = $request->idmerk;
         $motor->jenismerk = $request->jenismerk;
         $motor->save();
-        $id = $motor->id;
+        $id = $motor->idmotor;
 
         return $data = [
             'status' => true,
