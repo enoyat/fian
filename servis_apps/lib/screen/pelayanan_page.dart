@@ -1,18 +1,18 @@
 import 'package:servis_apps/models/merkmodel.dart';
 import 'package:servis_apps/models/motormodel.dart';
+import 'package:servis_apps/models/pelayananmodel.dart';
 import 'package:servis_apps/screen/home_page.dart';
 import 'package:servis_apps/utils/merk_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:servis_apps/utils/motor_dio.dart';
-
-
+import 'package:servis_apps/utils/pelayanan_dio.dart';
 
 class PelayananPage extends StatefulWidget {
   const PelayananPage({
     Key? key,
     required this.userid,
   }) : super(key: key);
-  final int userid; 
+  final int userid;
 
   @override
   State<PelayananPage> createState() => _PelayananPageState();
@@ -22,19 +22,27 @@ class _PelayananPageState extends State<PelayananPage> {
   final _formKey = GlobalKey<FormState>();
   final jenismerk = TextEditingController();
   final nopolisi = TextEditingController();
-  int idmerk = 0;
+  bool pelayanan1 = false;
+  bool pelayanan2 = false;
+  bool pelayanan3 = false;
+  bool pelayanan4 = false;
+  bool pelayanan5 = false;
+  bool pelayanan6 = false;
+  bool pelayanan7 = false;
+  final  pelayananlain = TextEditingController();
+  
+  int idmotor = 0;
 
   bool isLoading = false;
-  List<Merkmodel> xlistmerk = [];
   List<Motor> listmotor = [];
 
   void refreshdata() {
     setState(() {
       isLoading = true;
     });
-    MerkDio().listmerk().then((value) {
+    MotorDio().listmotor(widget.userid).then((value) {
       setState(() {
-        xlistmerk = value;       
+        listmotor = value;
         isLoading = false;
       });
     });
@@ -51,114 +59,212 @@ class _PelayananPageState extends State<PelayananPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Registrasi Motor',
+          'Pelayanan',
           textAlign: TextAlign.left,
           style: TextStyle(color: Color.fromARGB(255, 235, 231, 231)),
         ),
         actions: [
-          IconButton(onPressed: () {
-            refreshdata();
-          }, icon: const Icon(Icons.refresh))
+          IconButton(
+              onPressed: () {
+                refreshdata();
+              },
+              icon: const Icon(Icons.refresh))
         ],
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-             Container(
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              Container(
                 margin: const EdgeInsets.only(left: 20, right: 20),
-                child: xlistmerk.isEmpty
+                child: listmotor.isEmpty
                     ? const SizedBox()
                     : DropdownButtonFormField(
-                        hint: const Text('Pilih Merk'),
+                        hint: const Text('Pilih Motor'),
                         onChanged: (value) {
                           setState(() {
-                            idmerk = value as int;
+                            idmotor = value as int;
                           });
-                          
                         },
-                        items: xlistmerk
+                        items: listmotor
                             .map((e) => DropdownMenuItem(
-                                  value: e.idmerk,
-                                  child: Text(e.jenismerk),
+                                  value: e.idmotor,
+                                  child: Text("${e.nopolisi} - ${e.jenismerk}"),
                                 ))
                             .toList(),
                       ),
               ),
-            const SizedBox(height: 20),
-             Container(
-              margin: const EdgeInsets.only(left: 20, right: 20),
-              child: TextFormField(
-                controller: jenismerk,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Jenis Merk',
+                  
+              Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                child: CheckboxListTile(
+                  title: const Text('pelayanan 1'),
+                  value: pelayanan1,
+                  onChanged: (value) {
+                    setState(() {
+                      pelayanan1 = value!;
+                    });
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your Jenis';
-                  }
-                  return null;
-                },
               ),
-            ),
-            const SizedBox(height: 20),
-            Container(
-              margin: const EdgeInsets.only(left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () async {
-                     final motor  = Motor(
-                        iduser: widget.userid,
-                        nopolisi: nopolisi.text,
-                        idmerk: idmerk,                        
-                        jenismerk: jenismerk.text,
-                      );
-                      if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')));
-
-                        await MotorDio().postmotor(motor).then((value) {
-                          value["status"] == false
-                              ? ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text(
-                                          'Register Failed, cek kembali data anda')))
-                              : ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text('Register Success')));
-                          Future.delayed(
-                              const Duration(seconds: 5)
-                              // ignore: avoid_types_on_closure_parameters
-                              , () {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    const HomePage(),
-                              ),
-                              (route) => false,
-                            );
+                      
+              Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                child: CheckboxListTile(
+                  title: const Text('pelayanan 2'),
+                  value: pelayanan2,
+                  onChanged: (value) {
+                    setState(() {
+                      pelayanan2 = value!;
+                    });
+                  },
+                ),
+              ),
+                     
+              Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                child: CheckboxListTile(
+                  title: const Text('pelayanan 3'),
+                  value: pelayanan3,
+                  onChanged: (value) {
+                    setState(() {
+                      pelayanan3 = value!;
+                    });
+                  },
+                ),
+              ),
+                 
+              Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                child: CheckboxListTile(
+                  title: const Text('pelayanan 4'),
+                  value: pelayanan4,
+                  onChanged: (value) {
+                    setState(() {
+                      pelayanan4 = value!;
+                    });
+                  },
+                ),
+              ),
+              
+              Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                child: CheckboxListTile(
+                  title: const Text('pelayanan 5'),
+                  value: pelayanan5,
+                  onChanged: (value) {
+                    setState(() {
+                      pelayanan5 = value!;
+                    });
+                  },
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                child: CheckboxListTile(
+                  title: const Text('pelayanan 6'),
+                  value: pelayanan6,
+                  onChanged: (value) {
+                    setState(() {
+                      pelayanan6 = value!;
+                    });
+                  },
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                child: CheckboxListTile(
+                  title: const Text('pelayanan 7'),
+                  value: pelayanan7,
+                  onChanged: (value) {
+                    setState(() {
+                      pelayanan7 = value!;
+                    });
+                  },
+                ),
+              ),
+               Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                child: TextFormField(
+                  controller: pelayananlain,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Pelayanan Lain',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'pelayanan lain';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () async {
+                        final pelayanan = PelayananModel(
+                          iduser: widget.userid,
+                          idmotor: idmotor,
+                          pelayanan1: pelayanan1,
+                          pelayanan2: pelayanan2,
+                          pelayanan3: pelayanan3,
+                          pelayanan4: pelayanan4,
+                          pelayanan5: pelayanan5,
+                          pelayanan6: pelayanan6,
+                          pelayanan7: pelayanan7,
+                          pelayananlain: pelayananlain.text,
+      
+                        );
+                        if (_formKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Processing Data')));
+      
+                          await PelayananDio().postpelayanan(pelayanan).then((value) {
+                            value["status"] == false
+                                ? ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'Register Failed, cek kembali data anda')))
+                                : ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Simpan Success')));
+                            Future.delayed(
+                                const Duration(seconds: 5)
+                                // ignore: avoid_types_on_closure_parameters
+                                , () {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      const HomePage(),
+                                ),
+                                (route) => false,
+                              );
+                            });
                           });
-                        });
-                      }
-                    },
-                    child: const Text('Simpan'),
-                  ),
-                  const SizedBox(width: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Batal'),
-                  ),
-                ],
+                        }
+                      },
+                      child: const Text('Simpan'),
+                    ),
+                    const SizedBox(width: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Batal'),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

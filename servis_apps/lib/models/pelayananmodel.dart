@@ -2,19 +2,19 @@ import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class PelayananModel {
-  final int idpelayanan;
+  final int? idpelayanan;
   final int iduser;
   final int idmotor;
-  final int pelayanan1;
-  final int pelayanan2;
-  final int pelayanan3;
-  final int pelayanan4;
-  final int pelayanan5;
-  final int pelayanan6;
-  final int pelayanan7;
-  final int pelayananlain;
+  final bool pelayanan1;
+  final bool pelayanan2;
+  final bool pelayanan3;
+  final bool pelayanan4;
+  final bool pelayanan5;
+  final bool pelayanan6;
+  final bool pelayanan7;
+  final String pelayananlain;
   PelayananModel({
-    required this.idpelayanan,
+    this.idpelayanan,
     required this.iduser,
     required this.idmotor,
     required this.pelayanan1,
@@ -26,6 +26,7 @@ class PelayananModel {
     required this.pelayanan7,
     required this.pelayananlain,
   });
+
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -45,17 +46,17 @@ class PelayananModel {
 
   factory PelayananModel.fromMap(Map<String, dynamic> map) {
     return PelayananModel(
-      idpelayanan: map['idpelayanan'] as int,
+      idpelayanan: map['idpelayanan'] != null ? map['idpelayanan'] as int : null,
       iduser: map['iduser'] as int,
       idmotor: map['idmotor'] as int,
-      pelayanan1: map['pelayanan1'] as int,
-      pelayanan2: map['pelayanan2'] as int,
-      pelayanan3: map['pelayanan3'] as int,
-      pelayanan4: map['pelayanan4'] as int,
-      pelayanan5: map['pelayanan5'] as int,
-      pelayanan6: map['pelayanan6'] as int,
-      pelayanan7: map['pelayanan7'] as int,
-      pelayananlain: map['pelayananlain'] as int,
+      pelayanan1: map['pelayanan1'] as bool,
+      pelayanan2: map['pelayanan2'] as bool,
+      pelayanan3: map['pelayanan3'] as bool,
+      pelayanan4: map['pelayanan4'] as bool,
+      pelayanan5: map['pelayanan5'] as bool,
+      pelayanan6: map['pelayanan6'] as bool,
+      pelayanan7: map['pelayanan7'] as bool,
+      pelayananlain: map['pelayananlain'] as String,
     );
   }
 
