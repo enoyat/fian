@@ -22,7 +22,6 @@ class _HomePageState extends State<HomePage> {
   String? email = "";
   int? userid = 0;
 
-
   void _ontap(int index) async {
     if (index == 0) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -47,7 +46,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  
   void _setter() async {
     setState(() {
       isLoading = true;
@@ -66,7 +64,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _setter();
-    
+
     super.initState();
   }
 
@@ -89,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context) {
-                                  return  ListMotorPage(userid: userid!);
+                                  return ListMotorPage(userid: userid!);
                                 },
                               ));
                               // showAboutDialog(
@@ -104,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context) {
-                                  return  RegisterMotor(userid: userid!);
+                                  return RegisterMotor(userid: userid!);
                                 },
                               ));
                             },
@@ -118,9 +116,9 @@ class _HomePageState extends State<HomePage> {
                         menuChildren: <Widget>[
                           MenuItemButton(
                             onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
+                              Navigator.push(context, MaterialPageRoute(
                                 builder: (context) {
-                                  return  PelayananPage(userid: userid!);
+                                  return PelayananPage(userid: userid!);
                                 },
                               ));
                             },
@@ -151,7 +149,7 @@ class _HomePageState extends State<HomePage> {
               width: double.infinity,
               child: Card(
                 margin: const EdgeInsets.only(top: 5, bottom: 5),
-                color: const Color.fromARGB(255, 3, 68, 17),
+                color: Color.fromARGB(255, 218, 98, 12),
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
