@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, empty_catches
 import "package:dio/dio.dart";
+import "package:servis_apps/models/Motorgetmodel.dart";
+import "package:servis_apps/models/merkmodel.dart";
 import "package:servis_apps/models/motormodel.dart";
 
 class MotorDio   {
@@ -20,6 +22,16 @@ class MotorDio   {
       throw Exception("Exception occured: $e");
     }
   }
+  Future<List<Motorgetmodel>> listgetmotor(int id) async {
+    try {
+      final result = await dio.get('$baseUrl/motor/listgetmotor/$id');
+      return (result.data as List)
+          .map((e) => Motorgetmodel.fromMap(e as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      throw Exception("Exception occured: $e");
+    }
+  }
 
 
 Future postmotor(Motor item) async {
@@ -35,10 +47,10 @@ Future postmotor(Motor item) async {
     }
   }
 
-  Future<void> delete(Motor item) async {
+  Future delete(Merkmodel item) async {
     try {
       final result = await dio.delete(
-        "$baseUrl/delete/${item.idmotor}",
+        "$baseUrl/motor/delete/${item.idmerk}",
       );
       return result.data;
     } catch (e) {}

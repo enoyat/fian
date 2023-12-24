@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, empty_catches
 import "package:dio/dio.dart";
+import "package:servis_apps/models/reservasigetmodel.dart";
 import "package:servis_apps/models/reservasimodel.dart";
 
 class ReservasiDio   {
@@ -20,12 +21,30 @@ class ReservasiDio   {
       throw Exception("Exception occured: $e");
     }
   }
-
-
-  Future<void> postReservasi(ReservasiModel item) async {
+  Future<List<ReservasigetModel>> listgetreservasiadmin() async {
+    try {
+      final result = await dio.get('$baseUrl/reservasi/listreservasiadmin/');
+      return (result.data as List)
+          .map((e) => ReservasigetModel.fromMap(e as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      throw Exception("Exception occured: $e");
+    }
+  }
+  Future<List<ReservasigetModel>> listgetreservasi(int id, String status) async {
+    try {
+      final result = await dio.get('$baseUrl/reservasi/listgetreservasi/$id/$status');
+      return (result.data as List)
+          .map((e) => ReservasigetModel.fromMap(e as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      throw Exception("Exception occured: $e");
+    }
+  }
+  Future postReservasi(ReservasiModel item) async {
     try {
       final result = await dio.post(
-        "$baseUrl/reservasi",
+        "$baseUrl/reservasi/store",
         data: item.toMap(),
       );
 

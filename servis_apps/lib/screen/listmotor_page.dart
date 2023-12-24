@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:servis_apps/models/motormodel.dart';
+import 'package:servis_apps/models/Motorgetmodel.dart';
 import 'package:servis_apps/utils/motor_dio.dart';
 import 'package:servis_apps/widget/itemmotor_widget.dart';
 
@@ -16,7 +16,7 @@ class ListMotorPage extends StatefulWidget {
 }
 
 class _ListMotorPageState extends State<ListMotorPage> {
-  List<Motor> motor = [];
+  List<Motorgetmodel> motor = [];
   bool isLoading = false;
   int motorCount = 0;
   int userid = 0;
@@ -25,7 +25,7 @@ class _ListMotorPageState extends State<ListMotorPage> {
     setState(() {
       isLoading = true;
     });
-    await MotorDio().listmotor(widget.userid).then((value) {
+    await MotorDio().listgetmotor(widget.userid).then((value) {
       setState(() {
         motor = value;
         isLoading = false;
@@ -47,9 +47,9 @@ class _ListMotorPageState extends State<ListMotorPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'motor',
+          'Motor',
           textAlign: TextAlign.left,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white70),
         ),
         actions: [
           IconButton(
@@ -70,9 +70,12 @@ class _ListMotorPageState extends State<ListMotorPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:  [
               Text(
-                'Daftar motor'
+                'Daftar Motor Terdaftar'
               ),
             ],
+          ),
+          const SizedBox(
+            height: 10,
           ),
           isLoading
               ? const Center(

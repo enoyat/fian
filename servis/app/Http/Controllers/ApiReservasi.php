@@ -16,20 +16,15 @@ class ApiReservasi extends Controller
 {
     public function store(Request $request)
     {
-        $validator_unique = Validator::make($request->all(), [
-            'idpelayanan' => 'required|unique:reservasi|idpelayanan',
-        ]);
-        if ($validator_unique->fails()) {
-            return $data = [
-                'status' => false,
-                'message' => 'Layanan sudah terdaftar',
-            ];
-        }
+        
         $motor = new Reservasi();      
         $motor->idpelayanan = $request->idpelayanan;
         $motor->idmekanik = $request->idmekanik;
+        $motor->tglreservasi = $request->tglreservasi;
+        $motor->jam = $request->jam;
+        $motor->statusreservasi = $request->statusreservasi;
         $motor->save();
-        $id = $motor->id;
+        $id = $motor->idreservasi;
 
         return $data = [
             'status' => true,
@@ -37,11 +32,29 @@ class ApiReservasi extends Controller
         ];
 
     }
-    
+    public function listreservasiadmin()
+    {
+       
+        $reservasi = Reservasi::join('pelayanan','reservasi.idpelayanan','=','pelayanan.idpelayanan')
+        ->join('motor','pelayanan.idmotor','=','motor.idmotor')
+        ->join('jenismerk','motor.idjenismerk','=','jenismerk.idjenismerk')
+        ->get();           
+        return Response::json($reservasi);
+    }
     public function listreservasi($id)
     {
        
         $reservasi = Reservasi::join('pelayanan','reservasi.idpelayanan','=','pelayanan.idpelayanan')->where('iduser', $id)->get();      
+        return Response::json($reservasi);
+    }
+    public function listgetreservasi($id, $status)
+    {
+       
+        $reservasi = Reservasi::join('pelayanan','reservasi.idpelayanan','=','pelayanan.idpelayanan')
+        ->join('motor','pelayanan.idmotor','=','motor.idmotor')
+        ->join('jenismerk','motor.idjenismerk','=','jenismerk.idjenismerk')
+        ->where('statusreservasi', $status)
+        ->where('pelayanan.iduser', $id)->get();      
         return Response::json($reservasi);
     }
     public function show($id){

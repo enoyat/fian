@@ -1,8 +1,6 @@
-import 'package:servis_apps/models/merkmodel.dart';
 import 'package:servis_apps/models/motormodel.dart';
 import 'package:servis_apps/models/pelayananmodel.dart';
 import 'package:servis_apps/screen/home_page.dart';
-import 'package:servis_apps/utils/merk_dio.dart';
 import 'package:flutter/material.dart';
 import 'package:servis_apps/utils/motor_dio.dart';
 import 'package:servis_apps/utils/pelayanan_dio.dart';
@@ -91,12 +89,12 @@ class _PelayananPageState extends State<PelayananPage> {
                         items: listmotor
                             .map((e) => DropdownMenuItem(
                                   value: e.idmotor,
-                                  child: Text("${e.nopolisi} - ${e.jenismerk}"),
+                                  child: Text("${e.nopolisi} - ${e.idjenismerk}"),
                                 ))
                             .toList(),
                       ),
               ),
-                  
+ 
               Container(
                 margin: const EdgeInsets.only(left: 20, right: 20),
                 child: CheckboxListTile(

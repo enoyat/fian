@@ -26,7 +26,7 @@ class ApiMotor extends Controller
         $motor->iduser = $request->iduser;
         $motor->nopolisi = $request->nopolisi;
         $motor->idmerk = $request->idmerk;
-        $motor->jenismerk = $request->jenismerk;
+        $motor->idjenismerk = $request->idjenismerk;
         $motor->save();
         $id = $motor->idmotor;
 
@@ -40,6 +40,11 @@ class ApiMotor extends Controller
     public function listmotor($id)
     {
         $motor = Motor::where('iduser', $id)->get();      
+        return Response::json($motor);
+    }
+    public function listgetmotor($id)
+    {
+        $motor = Motor::join('jenismerk','motor.idjenismerk','=','jenismerk.idjenismerk')->where('iduser', $id)->get();      
         return Response::json($motor);
     }
     public function show($id){

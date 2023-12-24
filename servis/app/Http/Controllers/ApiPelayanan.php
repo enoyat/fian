@@ -17,17 +17,7 @@ class ApiPelayanan extends Controller
 {
     public function store(Request $request)
     {
-        $validator_unique = Validator::make($request->all(), [
-            'idpelayanan' => 'required|unique:pelayanan|idpelayanan',
-        ]);
-        if ($validator_unique->fails()) {
-            return $data = [
-                'status' => false,
-                'message' => 'Layanan sudah terdaftar',
-            ];
-        }
         $pelayanan = new Pelayanan();      
-        $pelayanan->idpelayanan = $request->idpelayanan;
         $pelayanan->iduser = $request->iduser;
         $pelayanan->idmotor = $request->idmotor;
         $pelayanan->pelayanan1 = $request->pelayanan1;
@@ -41,7 +31,7 @@ class ApiPelayanan extends Controller
 
 
         $pelayanan->save();
-        $id = $pelayanan->id;
+        $id = $pelayanan->idpelayanan;
 
         return $data = [
             'status' => true,
@@ -52,7 +42,15 @@ class ApiPelayanan extends Controller
     
     public function listpelayanan($id)
     {
-        $pelayanan = Pelayanan::where('iduser', $id)->get();      
+        $pelayanan = Pelayanan::join('motor','pelayanan.idmotor','=','motor.idmotor')
+        ->join('users','pelayanan.iduser','=','users.id')
+        ->where('pelayanan.iduser', $id)->get();      
+        return Response::json($pelayanan);
+    }
+    public function listgetpelayanan()
+    {
+        $pelayanan = Pelayanan::join('motor','pelayanan.idmotor','=','motor.idmotor')
+        ->join('users','pelayanan.iduser','=','users.id')->get();
         return Response::json($pelayanan);
     }
     public function show($id){

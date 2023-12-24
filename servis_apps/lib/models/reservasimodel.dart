@@ -2,13 +2,19 @@ import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class ReservasiModel {
-  final int idreservasi;
+  final int? idreservasi;
   final int idpelayanan;
   final int idmekanik;
+  final String tglreservasi;
+  final String jam;
+  final String statusreservasi;
   ReservasiModel({
-    required this.idreservasi,
+    this.idreservasi,
     required this.idpelayanan,
     required this.idmekanik,
+    required this.tglreservasi,
+    required this.jam,
+    required this.statusreservasi,
   });
 
   Map<String, dynamic> toMap() {
@@ -16,18 +22,24 @@ class ReservasiModel {
       'idreservasi': idreservasi,
       'idpelayanan': idpelayanan,
       'idmekanik': idmekanik,
+      'tglreservasi': tglreservasi,
+      'jam': jam,
+      'statusreservasi': statusreservasi,
     };
   }
 
   factory ReservasiModel.fromMap(Map<String, dynamic> map) {
     return ReservasiModel(
-      idreservasi: map['idreservasi'] as int,
+      idreservasi: map['idreservasi'] != null ? map['idreservasi'] as int : null,
       idpelayanan: map['idpelayanan'] as int,
       idmekanik: map['idmekanik'] as int,
+      tglreservasi: map['tglreservasi'] as String,
+      jam: map['jam'] as String,
+      statusreservasi: map['statusreservasi'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory ReservasiModel.fromJson(String source) => ReservasiModel.fromMap(json.decode(source) as Map<String, dynamic>);
-}
+  }

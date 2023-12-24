@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jenismerk;
 use App\Models\Merk;
 use App\Models\User;
 use App\Models\Motor;
@@ -15,16 +16,7 @@ class ApiMerk extends Controller
 
     public function store(Request $request)
     {
-        $validator_unique = Validator::make($request->all(), [
-            'jenismerk' => 'required|unique:merk|jenismerk',
-        ]);
-        if ($validator_unique->fails()) {
-            return $data = [
-                'status' => false,
-                'message' => 'Merk sudah terdaftar',
-            ];
-        }
-        $motor = new Motor();      
+        $motor = new Merk();      
         $motor->jenismerk = $request->jenismerk;
         $motor->save();
         $id = $motor->id;
@@ -36,18 +28,47 @@ class ApiMerk extends Controller
 
     }
     
+    public function storejenismerk(Request $request)
+    {
+        $motor = new Jenismerk();      
+        $motor->idmerk= $request->idmerk;
+        $motor->keterangan = $request->keterangan;
+        $motor->gambar = $request->gambar;
+
+        $motor->save();
+        $id = $motor->idjenismerk;
+
+        return $data = [
+            'status' => true,
+            'id' => $id,
+        ];
+
+    }
     public function listmerk()
     {
         $motor = Merk::get();      
         return Response::json($motor);
+    }
+    public function listjenismerk($id)
+    {
+        $jenismerk = Jenismerk::join('merk','jenismerk.idmerk','=','merk.idmerk')->where('merk.idmerk',$id)->get();      
+        return Response::json($jenismerk);
+    }
+    public function listgetjenismerk()
+    {
+        $jenismerk = Jenismerk::join('merk','jenismerk.idmerk','=','merk.idmerk')->get();      
+        return Response::json($jenismerk);
     }
     public function show($id){
         $motor = Merk::where('idmotor',$id)->get();
         return Response::json($motor);
     }
     public function delete($id){
-        $motor = Merk::where('idmotor',$id)->delete();
+        $motor = Merk::where('idmerk',$id)->delete();
         return Response::json($motor);
     }
-
+    public function jenismerkdelete($id){
+        $motor = Jenismerk::where('idjenismerk',$id)->delete();
+        return Response::json($motor);
+    }
 }

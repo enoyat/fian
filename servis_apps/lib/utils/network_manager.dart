@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, empty_catches
 import "package:dio/dio.dart";
+import "package:servis_apps/models/mekanik.dart";
 
 class NetworkManager {
   late Dio dio;
@@ -18,6 +19,16 @@ class NetworkManager {
         },
       );
       return result.data;
+    } catch (e) {
+      throw Exception("Exception occured: $e");
+    }
+  }
+  Future<List<MekanikModel>> listmekanik() async {
+    try {
+      final result = await dio.get('$baseUrl/listmekanik');
+      return (result.data as List)
+          .map((e) => MekanikModel.fromMap(e as Map<String, dynamic>))
+          .toList();
     } catch (e) {
       throw Exception("Exception occured: $e");
     }

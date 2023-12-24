@@ -1,35 +1,32 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:servis_apps/models/reservasigetmodel.dart';
-import 'package:servis_apps/models/user.dart';
-import 'package:servis_apps/utils/reservasidio.dart';
-import 'package:servis_apps/widget/itemreservasi_widget.dart';
+import 'package:servis_apps/models/merkmodel.dart';
+import 'package:servis_apps/screen/admin/merkpage.dart';
+import 'package:servis_apps/utils/merk_dio.dart';
+import 'package:servis_apps/widget/itemmerk_widget.dart';
 
-class ListReservasiPage extends StatefulWidget {
-  const ListReservasiPage({
+class ListMerkAdminPage extends StatefulWidget {
+  const ListMerkAdminPage({
     Key? key,
-    required this.userid,
   }) : super(key: key);
-  final int userid;
 
   @override
-  State<ListReservasiPage> createState() => _ListReservasiPageState();
+  State<ListMerkAdminPage> createState() => _ListMerkAdminPageState();
 }
 
-class _ListReservasiPageState extends State<ListReservasiPage> {
-  List<ReservasigetModel> reservasi = [];
+class _ListMerkAdminPageState extends State<ListMerkAdminPage> {
+  List<Merkmodel> merk = [];
   bool isLoading = false;
-  int reservasiCount = 0;
+  int merkCount = 0;
   int userid = 0;
-  List<User> usermodel = [];
 
   void refreshData() async {
     setState(() {
       isLoading = true;
     });
-    await ReservasiDio().listgetreservasi(widget.userid,'baru').then((value) {
+    await MerkDio().listmerk().then((value) {
       setState(() {
-        reservasi = value;
+        merk = value;
         isLoading = false;
       });
     });
@@ -37,8 +34,6 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
 
   @override
   void initState() {
-    userid = widget.userid;
-
     refreshData();
     super.initState();
   }
@@ -49,11 +44,12 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Reservasi',
+          'Merk',
           textAlign: TextAlign.left,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white70),
         ),
         actions: [
+
           IconButton(
               onPressed: () {
                 refreshData();
@@ -61,6 +57,15 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
               icon: const Icon(Icons.refresh))
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return const MerkAdminPage();
+          }));
+        },
+        child: const Icon(Icons.add),
+      ),
+      
       body: Container(
         padding: const EdgeInsets.all(20),
         width: size.width,
@@ -70,26 +75,27 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
           ),
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children:  [
-              Text(
-                'Daftar Reservasi'
-              ),
+            children: [
+              Text('Daftar Merk Terdaftar'),
             ],
+          ),
+          const SizedBox(
+            height: 10,
           ),
           isLoading
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : Expanded(
-                  child: reservasi.isEmpty
+                  child: merk.isEmpty
                       ? const Center(
                           child: Text('Tidak ada item'),
                         )
                       : ListView.builder(
-                          itemCount: reservasi.length,
+                          itemCount: merk.length,
                           itemBuilder: (context, index) {
-                            return ItemReservasiWidget(
-                              reservasi: reservasi[index],
+                            return ItemMerkWidget(
+                              merk: merk[index],
                               handleRefresh: refreshData,
                             );
                           }),

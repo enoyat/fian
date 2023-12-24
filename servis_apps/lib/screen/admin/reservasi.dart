@@ -1,60 +1,55 @@
-import 'package:servis_apps/models/jenismerk_model.dart';
-import 'package:servis_apps/models/merkmodel.dart';
-import 'package:servis_apps/models/motormodel.dart';
-import 'package:servis_apps/screen/home_page.dart';
-import 'package:servis_apps/utils/merk_dio.dart';
+import 'package:servis_apps/models/Pelayanangetmodel.dart';
+import 'package:servis_apps/models/mekanik.dart';
+import 'package:servis_apps/models/reservasimodel.dart';
+import 'package:servis_apps/screen/admin_page.dart';
 import 'package:flutter/material.dart';
-import 'package:servis_apps/utils/motor_dio.dart';
+import 'package:servis_apps/utils/network_manager.dart';
+import 'package:servis_apps/utils/pelayanan_dio.dart';
+import 'package:servis_apps/utils/reservasidio.dart';
 
 
 
-class RegisterMotor extends StatefulWidget {
-  const RegisterMotor({
+class ReservasiAdminPage extends StatefulWidget {
+  const ReservasiAdminPage({
     Key? key,
-    required this.userid,
   }) : super(key: key);
-  final int userid; 
+
 
   @override
-  State<RegisterMotor> createState() => _RegisterMotorState();
+  State<ReservasiAdminPage> createState() => _ReservasiAdminPageState();
 }
 
-class _RegisterMotorState extends State<RegisterMotor> {
+class _ReservasiAdminPageState extends State<ReservasiAdminPage> {
   final _formKey = GlobalKey<FormState>();
-  final jenismerk = TextEditingController();
-  final nopolisi = TextEditingController();
-  int idmerk = 0;
-  int idjenismerk = 0;
+  final txttgl = TextEditingController();
+  final txtjam = TextEditingController();
+
+
+  int idpelayanan = 0;
+  int idmekanik = 0;
 
   bool isLoading = false;
-  List<Merkmodel> xlistmerk = [];
-  List<Jenismerkmodel> xlistjenismerk = [];
-  List<Motor> listmotor = [];
-
+  List<MekanikModel> mekanik = [];
+  List<PelayanangetModel> pelayanan = [];
+  
   void refreshdata() {
     setState(() {
       isLoading = true;
     });
-    MerkDio().listmerk().then((value) {
+    PelayananDio().listgetpelayanan().then((value) {
       setState(() {
-        xlistmerk = value;       
+        pelayanan = value;       
+        isLoading = false;
+      });
+    });
+    NetworkManager().listmekanik().then((value) {
+      setState(() {
+        mekanik = value;       
         isLoading = false;
       });
     });
   }
-  void getmerk() async {
-    setState(() {
-      isLoading = true;
-      xlistjenismerk = [];
-    });
-
-    MerkDio().listjenismerk(idmerk).then((value) {
-      setState(() {
-        xlistjenismerk = value;
-        isLoading = false;
-      });
-    });
-  }
+  
 
   @override
   void initState() {
@@ -67,7 +62,7 @@ class _RegisterMotorState extends State<RegisterMotor> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Registrasi Motor',
+          'Approve Rerservasi',
           textAlign: TextAlign.left,
           style: TextStyle(color: Color.fromARGB(255, 235, 231, 231)),
         ),
@@ -82,39 +77,23 @@ class _RegisterMotorState extends State<RegisterMotor> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Container(
-              margin: const EdgeInsets.only(left: 20, right: 20),
-              child: TextFormField(
-                controller: nopolisi,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'No Polisi',
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your Nopolisi';
-                  }
-                  return null;
-                },
-              ),
-            ),
+           
              Container(
                 margin: const EdgeInsets.only(left: 20, right: 20),
-                child: xlistmerk.isEmpty
+                child: pelayanan.isEmpty
                     ? const SizedBox()
                     : DropdownButtonFormField(
-                        hint: const Text('Pilih Merk'),
+                        hint: const Text('Pilih Pelayanan'),
                         onChanged: (value) {
                           setState(() {
-                            idmerk = value as int;
-                            getmerk();
+                             idpelayanan= value as int;
                           });
                           
                         },
-                        items: xlistmerk
+                        items: pelayanan
                             .map((e) => DropdownMenuItem(
-                                  value: e.idmerk,
-                                  child: Text(e.jenismerk),
+                                  value: e.idpelayanan,
+                                  child: Text(e.nopolisi),
                                 ))
                             .toList(),
                       ),
@@ -122,27 +101,60 @@ class _RegisterMotorState extends State<RegisterMotor> {
             const SizedBox(height: 20),
             Container(
                 margin: const EdgeInsets.only(left: 20, right: 20),
-                child: xlistjenismerk.isEmpty
-                    ? const Text('Jenis Merk Kosong')
+                child: mekanik.isEmpty
+                    ? const Text('mekanik  Kosong')
                     : DropdownButtonFormField(
-                        hint: const Text('Pilih JenisMerk'),
+                        hint: const Text('Pilih Mekanik'),
                         onChanged: (value) {
                           setState(() {
-                            idjenismerk = value as int;
-                            jenismerk.text = idjenismerk.toString();
+                            idmekanik = value as int;
                           });
                           
                           
                         },
-                        items: xlistjenismerk
+                        items: mekanik
                             .map((e) => DropdownMenuItem(
-                                  value: e.idjenismerk,
-                                  child: Text(e.keterangan),
+                                  value: e.id,
+                                  child: Text(e.name),
                                 ))
                             .toList(),
                       ),
               ),
               
+            const SizedBox(height: 20),
+             Container(
+              margin: const EdgeInsets.only(left: 20, right: 20),
+              child: TextFormField(
+                controller: txttgl,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Tanggal',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your Tanggal';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            const SizedBox(height: 20),
+             Container(
+              margin: const EdgeInsets.only(left: 20, right: 20),
+              child: TextFormField(
+                controller: txtjam,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Jam',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your Jam';
+                  }
+                  return null;
+                },
+              ),
+            ),
             const SizedBox(height: 20),
             Container(
               margin: const EdgeInsets.only(left: 20, right: 20),
@@ -151,17 +163,18 @@ class _RegisterMotorState extends State<RegisterMotor> {
                 children: [
                   ElevatedButton(
                     onPressed: () async {
-                     final motor  = Motor(
-                        iduser: widget.userid,
-                        nopolisi: nopolisi.text,
-                        idmerk: idmerk,                        
-                        idjenismerk: idjenismerk,
+                     final reservasi  = ReservasiModel(
+                        jam: "00:10",
+                        statusreservasi: "baru",
+                        tglreservasi: "2021-09-09",
+                        idpelayanan: idpelayanan,
+                        idmekanik: idmekanik,
                       );
                       if (_formKey.currentState!.validate()) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Processing Data')));
 
-                        await MotorDio().postmotor(motor).then((value) {
+                        await ReservasiDio().postReservasi(reservasi).then((value) {
                           value["status"] == false
                               ? ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
@@ -178,7 +191,7 @@ class _RegisterMotorState extends State<RegisterMotor> {
                               context,
                               MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    const HomePage(),
+                                    const AdminPage(),
                               ),
                               (route) => false,
                             );

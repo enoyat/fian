@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      color: const Color.fromARGB(255, 7, 55, 95),
+      color: const Color.fromARGB(255, 64, 136, 4),
       padding: const EdgeInsets.all(30),
       child: Center(
           child: Card(

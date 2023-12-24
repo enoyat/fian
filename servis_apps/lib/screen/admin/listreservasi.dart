@@ -1,33 +1,30 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:servis_apps/models/reservasigetmodel.dart';
-import 'package:servis_apps/models/user.dart';
+import 'package:servis_apps/screen/admin/reservasi.dart';
 import 'package:servis_apps/utils/reservasidio.dart';
 import 'package:servis_apps/widget/itemreservasi_widget.dart';
 
-class ListReservasiPage extends StatefulWidget {
-  const ListReservasiPage({
+class ListReservasiAdminPage extends StatefulWidget {
+  const ListReservasiAdminPage({
     Key? key,
-    required this.userid,
   }) : super(key: key);
-  final int userid;
 
   @override
-  State<ListReservasiPage> createState() => _ListReservasiPageState();
+  State<ListReservasiAdminPage> createState() => _ListReservasiAdminPageState();
 }
 
-class _ListReservasiPageState extends State<ListReservasiPage> {
+class _ListReservasiAdminPageState extends State<ListReservasiAdminPage> {
   List<ReservasigetModel> reservasi = [];
   bool isLoading = false;
-  int reservasiCount = 0;
+
   int userid = 0;
-  List<User> usermodel = [];
 
   void refreshData() async {
     setState(() {
       isLoading = true;
     });
-    await ReservasiDio().listgetreservasi(widget.userid,'baru').then((value) {
+    await ReservasiDio().listgetreservasiadmin().then((value) {
       setState(() {
         reservasi = value;
         isLoading = false;
@@ -37,8 +34,6 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
 
   @override
   void initState() {
-    userid = widget.userid;
-
     refreshData();
     super.initState();
   }
@@ -51,9 +46,10 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
         title: const Text(
           'Reservasi',
           textAlign: TextAlign.left,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white70),
         ),
         actions: [
+
           IconButton(
               onPressed: () {
                 refreshData();
@@ -61,6 +57,15 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
               icon: const Icon(Icons.refresh))
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return const ReservasiAdminPage();
+          }));
+        },
+        child: const Icon(Icons.add),
+      ),
+      
       body: Container(
         padding: const EdgeInsets.all(20),
         width: size.width,
@@ -70,11 +75,12 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
           ),
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children:  [
-              Text(
-                'Daftar Reservasi'
-              ),
+            children: [
+              Text('Daftar Merk Terdaftar'),
             ],
+          ),
+          const SizedBox(
+            height: 10,
           ),
           isLoading
               ? const Center(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:servis_apps/screen/listmotor_page.dart';
+import 'package:servis_apps/screen/listpelayanan_page.dart';
 import 'package:servis_apps/screen/listreservasipage.dart';
 import 'package:servis_apps/screen/pelayanan_page.dart';
 import 'package:servis_apps/screen/register_motor.dart';
@@ -128,11 +129,11 @@ class _HomePageState extends State<HomePage> {
                           ),
                           MenuItemButton(
                             onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Minify!'),
-                                ),
-                              );
+                               Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return  ListPelayananPage(userid: userid!);
+                                },
+                              ));
                             },
                             child:
                                 const MenuAcceleratorLabel('&History Layanan'),
@@ -188,6 +189,54 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(
               height: 20,
+            ),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(top: 5),
+                width: double.infinity,
+                child: Card(
+                  margin: const EdgeInsets.only(top: 5, bottom: 5),
+                  
+                  color: const Color.fromARGB(255, 3, 68, 17),
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    
+                  ),
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image(
+                        image: AssetImage('assets/images/logo.png'),
+                        width: 100,
+                        height: 100,
+                      ),
+                      SizedBox(height: 5),
+                      Text('Bengkel Oka Motor',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 196, 190, 190),
+                          )),
+                      SizedBox(height: 5),
+                      Text('Jl. Raya Puputan No. 86, Renon, Denpasar',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 196, 190, 190),
+                          ),
+                          textAlign: TextAlign.center),
+                      SizedBox(height: 5),
+                      Text('Telp. 0361-234567',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 196, 190, 190),
+                          ),
+                          textAlign: TextAlign.center),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),

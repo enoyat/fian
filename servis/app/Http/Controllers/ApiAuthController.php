@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
 
 class ApiAuthController extends Controller
 {
@@ -73,7 +74,11 @@ class ApiAuthController extends Controller
         ];
 
     }
-
+    public function listmekanik()
+    {
+        $user = User::where('roles_id',2)->get();      
+        return Response::json($user);
+    }
 
     public function gantipassword(Request $request)
     {

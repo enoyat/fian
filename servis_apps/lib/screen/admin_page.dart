@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:servis_apps/screen/admin/listjenismerk.dart';
+import 'package:servis_apps/screen/admin/listmerk.dart';
+import 'package:servis_apps/screen/admin/listreservasi.dart';
+import 'package:servis_apps/screen/admin/pelayanan.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'listreservasipage.dart';
 import 'login_page.dart';
 
 class AdminPage extends StatefulWidget {
@@ -25,13 +28,6 @@ class _AdminPageState extends State<AdminPage> {
         return const AdminPage();
       }));
     } else if (index == 1) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return ListReservasiPage(
-          userid: userid!,
-        );
-      }));
-    
-    } else if (index == 2) {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       await preferences.clear();
       if (!mounted) return;
@@ -83,46 +79,47 @@ class _AdminPageState extends State<AdminPage> {
                         menuChildren: <Widget>[
                           MenuItemButton(
                             onPressed: () {
-                              showAboutDialog(
-                                context: context,
-                                applicationName: 'MenuBar Sample',
-                                applicationVersion: '1.0.0',
-                              );
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const ListMerkAdminPage();
+                              }));                            
                             },
-                            child: const MenuAcceleratorLabel('&Motor'),
+                            child: const MenuAcceleratorLabel('&Merk Motor'),
                           ),
                           MenuItemButton(
                             onPressed: () {
+                               Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const ListJenisMerkAdminPage();
+                              })); 
                              
                             },
                             child:
-                                const MenuAcceleratorLabel('&Registrasi Motor'),
+                                const MenuAcceleratorLabel('&Jenis Merk Motor'),
                           ),
                         ],
-                        child: const MenuAcceleratorLabel('&Motor'),
+                        child: const MenuAcceleratorLabel('&Master'),
                       ),
                       SubmenuButton(
                         menuChildren: <Widget>[
                           MenuItemButton(
                             onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Magnify!'),
-                                ),
-                              );
+                               Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const ListPelayananAdminPage();
+                              })); 
                             },
-                            child: const MenuAcceleratorLabel('&Reservasi'),
+                            child: const MenuAcceleratorLabel('&Pelayanan'),
                           ),
                           MenuItemButton(
                             onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Minify!'),
-                                ),
-                              );
+                               Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const ListReservasiAdminPage();
+                              })); 
                             },
                             child:
-                                const MenuAcceleratorLabel('&History Layanan'),
+                                const MenuAcceleratorLabel('&Reservasi Motor'),
                           ),
                         ],
                         child: const MenuAcceleratorLabel('&Layanan'),
@@ -190,10 +187,7 @@ class _AdminPageState extends State<AdminPage> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt_outlined),
-            label: 'Reservasi',
-          ),
+        
           BottomNavigationBarItem(
             icon: Icon(Icons.logout),
             label: 'Logout',

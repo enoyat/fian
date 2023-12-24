@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:servis_apps/models/motormodel.dart';
-
+import 'package:servis_apps/models/Motorgetmodel.dart';
 
 class ItemMotorWidget extends StatelessWidget {
   const ItemMotorWidget({
@@ -9,7 +8,7 @@ class ItemMotorWidget extends StatelessWidget {
     required this.motor,
     required this.handleRefresh,
   }) : super(key: key);
-  final Motor motor;
+  final Motorgetmodel motor;
   final Function handleRefresh;
 
   @override
@@ -23,12 +22,25 @@ class ItemMotorWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(motor.nopolisi.toString()),
-                const SizedBox(
-                  height: 5,
+                ListTile(
+                  leading: Image.network('http://192.168.10.254:8000/assets/img//${motor.gambar}',
+                  width: 50,
+                  height: 50,
+                  fit: BoxFit.cover,
+                  
+                  ) ,
+                  
+                  iconColor: Colors.blue,
+                  title: Text(motor.keterangan.toString()),
+                  subtitle: Text(motor.nopolisi.toString()),
+                  trailing: IconButton(
+                    onPressed: () {
+                      handleRefresh();
+                    },
+                    icon: const Icon(Icons.refresh),
+                  ),
                 ),
-                Text(motor.jenismerk.toString()), 
-              ],
+               ],
             ),
           ),
         ],

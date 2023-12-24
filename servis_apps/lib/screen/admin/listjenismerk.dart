@@ -1,35 +1,32 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:servis_apps/models/reservasigetmodel.dart';
-import 'package:servis_apps/models/user.dart';
-import 'package:servis_apps/utils/reservasidio.dart';
-import 'package:servis_apps/widget/itemreservasi_widget.dart';
+import 'package:servis_apps/models/jenismerk_model.dart';
+import 'package:servis_apps/screen/admin/jenismerk.dart';
+import 'package:servis_apps/utils/merk_dio.dart';
+import 'package:servis_apps/widget/itemjenismerk_widget.dart';
 
-class ListReservasiPage extends StatefulWidget {
-  const ListReservasiPage({
+class ListJenisMerkAdminPage extends StatefulWidget {
+  const ListJenisMerkAdminPage({
     Key? key,
-    required this.userid,
   }) : super(key: key);
-  final int userid;
 
   @override
-  State<ListReservasiPage> createState() => _ListReservasiPageState();
+  State<ListJenisMerkAdminPage> createState() => _ListJenisMerkAdminPageState();
 }
 
-class _ListReservasiPageState extends State<ListReservasiPage> {
-  List<ReservasigetModel> reservasi = [];
+class _ListJenisMerkAdminPageState extends State<ListJenisMerkAdminPage> {
+  List<Jenismerkmodel> jenismerk = [];
   bool isLoading = false;
-  int reservasiCount = 0;
+  int merkCount = 0;
   int userid = 0;
-  List<User> usermodel = [];
 
   void refreshData() async {
     setState(() {
       isLoading = true;
     });
-    await ReservasiDio().listgetreservasi(widget.userid,'baru').then((value) {
+    await MerkDio().listgetjenismerk().then((value) {
       setState(() {
-        reservasi = value;
+        jenismerk = value;
         isLoading = false;
       });
     });
@@ -37,8 +34,6 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
 
   @override
   void initState() {
-    userid = widget.userid;
-
     refreshData();
     super.initState();
   }
@@ -49,11 +44,12 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Reservasi',
+          'Jenis Merk',
           textAlign: TextAlign.left,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white70),
         ),
         actions: [
+
           IconButton(
               onPressed: () {
                 refreshData();
@@ -61,6 +57,15 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
               icon: const Icon(Icons.refresh))
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return const JenisMerkAdminPage();
+          }));
+        },
+        child: const Icon(Icons.add),
+      ),
+      
       body: Container(
         padding: const EdgeInsets.all(20),
         width: size.width,
@@ -70,26 +75,27 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
           ),
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children:  [
-              Text(
-                'Daftar Reservasi'
-              ),
+            children: [
+              Text('Daftar Jenis Merk Terdaftar'),
             ],
+          ),
+          const SizedBox(
+            height: 10,
           ),
           isLoading
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : Expanded(
-                  child: reservasi.isEmpty
+                  child: jenismerk.isEmpty
                       ? const Center(
                           child: Text('Tidak ada item'),
                         )
                       : ListView.builder(
-                          itemCount: reservasi.length,
+                          itemCount: jenismerk.length,
                           itemBuilder: (context, index) {
-                            return ItemReservasiWidget(
-                              reservasi: reservasi[index],
+                            return ItemJenisMerkWidget(
+                              jenismerk: jenismerk[index],
                               handleRefresh: refreshData,
                             );
                           }),

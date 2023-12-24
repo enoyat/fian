@@ -1,25 +1,27 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:servis_apps/models/reservasigetmodel.dart';
+import 'package:servis_apps/models/Pelayanangetmodel.dart';
 import 'package:servis_apps/models/user.dart';
-import 'package:servis_apps/utils/reservasidio.dart';
-import 'package:servis_apps/widget/itemreservasi_widget.dart';
+import 'package:servis_apps/utils/pelayanan_dio.dart';
+import 'package:servis_apps/widget/itempelayanan_widget.dart';
 
-class ListReservasiPage extends StatefulWidget {
-  const ListReservasiPage({
+class ListPelayananPage extends StatefulWidget {
+  const ListPelayananPage({
     Key? key,
     required this.userid,
   }) : super(key: key);
   final int userid;
 
   @override
-  State<ListReservasiPage> createState() => _ListReservasiPageState();
+  State<ListPelayananPage> createState() => _ListPelayananPageState();
 }
 
-class _ListReservasiPageState extends State<ListReservasiPage> {
-  List<ReservasigetModel> reservasi = [];
+class _ListPelayananPageState extends State<ListPelayananPage> {
+
+  List<PelayanangetModel> pelayanan = [];
+  
   bool isLoading = false;
-  int reservasiCount = 0;
+  int pelayananCount = 0;
   int userid = 0;
   List<User> usermodel = [];
 
@@ -27,9 +29,9 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
     setState(() {
       isLoading = true;
     });
-    await ReservasiDio().listgetreservasi(widget.userid,'baru').then((value) {
+    await PelayananDio().listpelayanan(widget.userid).then((value) {
       setState(() {
-        reservasi = value;
+        pelayanan = value;
         isLoading = false;
       });
     });
@@ -49,7 +51,7 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Reservasi',
+          'Reservasi Pelayanan',
           textAlign: TextAlign.left,
           style: TextStyle(color: Colors.black),
         ),
@@ -72,7 +74,7 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:  [
               Text(
-                'Daftar Reservasi'
+                'Daftar Reservasi Pelayanan'
               ),
             ],
           ),
@@ -81,15 +83,15 @@ class _ListReservasiPageState extends State<ListReservasiPage> {
                   child: CircularProgressIndicator(),
                 )
               : Expanded(
-                  child: reservasi.isEmpty
+                  child: pelayanan.isEmpty
                       ? const Center(
                           child: Text('Tidak ada item'),
                         )
                       : ListView.builder(
-                          itemCount: reservasi.length,
+                          itemCount: pelayanan.length,
                           itemBuilder: (context, index) {
-                            return ItemReservasiWidget(
-                              reservasi: reservasi[index],
+                            return ItemPelayananWidget(
+                              pelayanan: pelayanan[index],
                               handleRefresh: refreshData,
                             );
                           }),
