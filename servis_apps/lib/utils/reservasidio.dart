@@ -31,6 +31,16 @@ class ReservasiDio   {
       throw Exception("Exception occured: $e");
     }
   }
+    Future<List<ReservasigetModel>> historyreservasi(String status) async {
+    try {
+      final result = await dio.get('$baseUrl/reservasi/historyreservasi');
+      return (result.data as List)
+          .map((e) => ReservasigetModel.fromMap(e as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      throw Exception("Exception occured: $e");
+    }
+  }
   Future<List<ReservasigetModel>> listgetreservasi(int id, String status) async {
     try {
       final result = await dio.get('$baseUrl/reservasi/listgetreservasi/$id/$status');
@@ -45,6 +55,18 @@ class ReservasiDio   {
     try {
       final result = await dio.post(
         "$baseUrl/reservasi/store",
+        data: item.toMap(),
+      );
+
+      return result.data;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+ Future reservasiselesai(ReservasigetModel item) async {
+    try {
+      final result = await dio.post(
+        "$baseUrl/reservasi/reservasiselesai",
         data: item.toMap(),
       );
 

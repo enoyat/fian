@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:servis_apps/models/reservasigetmodel.dart';
+import 'package:servis_apps/utils/reservasidio.dart';
 
 class ItemReservasiWidget extends StatelessWidget {
   const ItemReservasiWidget({
@@ -51,7 +52,19 @@ class ItemReservasiWidget extends StatelessWidget {
                     height: 5,
                   ),
                   Image.network(
-                    'http://192.168.10.254:8000/assets/img/${reservasi.gambar}'),
+                    'http://192.168.10.254:8000/assets/img/${reservasi.gambar}',
+                    width: 100,
+                    height: 100,
+                    ),
+                    Row(
+                      children: [
+                        const Text('Approve Reservasi Selesai: '),
+                        IconButton(onPressed: (){
+                          ReservasiDio().reservasiselesai(reservasi);
+                          handleRefresh();
+                        }, icon: const Icon(Icons.motorcycle_sharp), color: Colors.green,),
+                      ],
+                    )
                 ],
               ),
             ),

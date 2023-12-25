@@ -15,11 +15,16 @@ class ApiMedia extends Controller
     {
        // $file =  $request->filegambar;
         $file =  $request->file('image');
-        $pathUpload = 'assets/inventory';
+        $pathUpload = 'assets/img/';
 
         $extension = $file->getClientOriginalExtension();
         $filename = time() . '.' . $extension;
         $file->move($pathUpload, $filename);
-        return  $filename;
+        
+        return $data = [
+            'status' => true,
+            'filename' => $filename,
+        ];
+
     }
 }

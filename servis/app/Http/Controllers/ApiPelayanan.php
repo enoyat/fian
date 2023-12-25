@@ -50,7 +50,8 @@ class ApiPelayanan extends Controller
     public function listgetpelayanan()
     {
         $pelayanan = Pelayanan::join('motor','pelayanan.idmotor','=','motor.idmotor')
-        ->join('users','pelayanan.iduser','=','users.id')->get();
+        ->join('users','pelayanan.iduser','=','users.id')
+        ->where('pelayanan.statuspelayanan', "baru")->get();
         return Response::json($pelayanan);
     }
     public function show($id){

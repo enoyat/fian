@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2023 at 09:23 PM
+-- Generation Time: Dec 25, 2023 at 05:52 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `jenismerk` (
   `idmerk` int(11) NOT NULL,
   `gambar` text NOT NULL,
   PRIMARY KEY (`idjenismerk`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `jenismerk`
@@ -43,7 +43,10 @@ CREATE TABLE IF NOT EXISTS `jenismerk` (
 INSERT INTO `jenismerk` (`idjenismerk`, `keterangan`, `idmerk`, `gambar`) VALUES
 (1, 'Honda Beat', 1, 'background.jpg'),
 (2, 'Honda Vario', 1, 'icon.png'),
-(4, 'mio', 3, 'icon.png');
+(4, 'mio', 3, 'icon.png'),
+(15, 'suziki', 2, '1703476009.jpg'),
+(16, 'yamaha vega', 3, '1703476056.jpg'),
+(17, 'R15', 3, '1703476119.jpg');
 
 -- --------------------------------------------------------
 
@@ -161,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `pelayanan` (
 
 INSERT INTO `pelayanan` (`idpelayanan`, `iduser`, `idmotor`, `pelayanan1`, `pelayanan2`, `pelayanan3`, `pelayanan4`, `pelayanan5`, `pelayanan6`, `pelayanan7`, `pelayananlain`, `statuspelayanan`) VALUES
 (10, 131, 8, 1, 0, 0, 1, 0, 1, 1, 'dsdsd', 'baru'),
-(11, 131, 9, 1, 1, 0, 0, 0, 0, 1, 'sdasdsad', 'baru');
+(11, 131, 9, 1, 1, 0, 0, 0, 0, 1, 'sdasdsad', 'finish');
 
 -- --------------------------------------------------------
 
@@ -187,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `reservasi` (
 --
 
 INSERT INTO `reservasi` (`idreservasi`, `idpelayanan`, `idmekanik`, `tglreservasi`, `jam`, `statusreservasi`) VALUES
-(4, 11, 133, '2021-09-09', '00:10', 'baru'),
+(4, 11, 133, '2021-09-09', '00:10', 'finish'),
 (5, 11, 133, '2021-09-09', '00:10', 'baru');
 
 -- --------------------------------------------------------

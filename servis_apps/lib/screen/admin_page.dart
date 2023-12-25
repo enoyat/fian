@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:servis_apps/screen/admin/historyreservasi.dart';
 import 'package:servis_apps/screen/admin/listjenismerk.dart';
 import 'package:servis_apps/screen/admin/listmerk.dart';
 import 'package:servis_apps/screen/admin/listreservasi.dart';
@@ -27,7 +28,14 @@ class _AdminPageState extends State<AdminPage> {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const AdminPage();
       }));
-    } else if (index == 1) {
+    
+     } else if (index == 1) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return const ListReservasiAdminPage();
+      }));
+    } 
+    
+     else if (index == 2) {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       await preferences.clear();
       if (!mounted) return;
@@ -115,7 +123,7 @@ class _AdminPageState extends State<AdminPage> {
                             onPressed: () {
                                Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                return const ListReservasiAdminPage();
+                                return const HistoryReservasiPage();
                               })); 
                             },
                             child:
@@ -186,6 +194,10 @@ class _AdminPageState extends State<AdminPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
+          ),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt_outlined),
+            label: 'Reservasi',
           ),
         
           BottomNavigationBarItem(

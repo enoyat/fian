@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Jadwal;
+use App\Models\Pelayanan;
 use App\Models\Pendaftaran;
 use App\Models\Reservasi;
 use Illuminate\Http\Request;
@@ -38,6 +39,16 @@ class ApiReservasi extends Controller
         $reservasi = Reservasi::join('pelayanan','reservasi.idpelayanan','=','pelayanan.idpelayanan')
         ->join('motor','pelayanan.idmotor','=','motor.idmotor')
         ->join('jenismerk','motor.idjenismerk','=','jenismerk.idjenismerk')
+        ->where('statusreservasi', "baru")
+        ->get();           
+        return Response::json($reservasi);
+    }
+    public function historyreservasi()
+    {
+       
+        $reservasi = Reservasi::join('pelayanan','reservasi.idpelayanan','=','pelayanan.idpelayanan')
+        ->join('motor','pelayanan.idmotor','=','motor.idmotor')
+        ->join('jenismerk','motor.idjenismerk','=','jenismerk.idjenismerk')
         ->get();           
         return Response::json($reservasi);
     }
@@ -65,5 +76,11 @@ class ApiReservasi extends Controller
         $reservasi = Reservasi::where('idservasi',$id)->delete();
         return Response::json($reservasi);
     }
-
+    public function reservasiselesai(Request $request){
+        $reservasi = Reservasi::where('idreservasi',$request->idreservasi)->update([
+            'statusreservasi' => "finish"]);
+            Pelayanan::where('idpelayanan',$request->idpelayanan)->update([
+                'statuspelayanan' => "finish"]);
+        return Response::json($reservasi);
+    }
 }

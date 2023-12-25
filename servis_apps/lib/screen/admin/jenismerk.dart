@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:servis_apps/models/jenismerk_model.dart';
 import 'package:servis_apps/models/merkmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:servis_apps/screen/admin/listjenismerk.dart';
+import 'package:servis_apps/utils/media.dart';
 import 'package:servis_apps/utils/merk_dio.dart';
-
+import 'package:servis_apps/widget/user_imagepicker.dart';
 
 class JenisMerkAdminPage extends StatefulWidget {
   const JenisMerkAdminPage({super.key});
@@ -12,14 +16,17 @@ class JenisMerkAdminPage extends StatefulWidget {
 }
 
 class _JenisMerkAdminPageState extends State<JenisMerkAdminPage> {
-  
-
   final _formKey = GlobalKey<FormState>();
   final keterangan = TextEditingController();
-   final gambar = TextEditingController();
-   List<Merkmodel> xlistmerk = [];
-     int idmerk = 0;
+  final gambar = TextEditingController();
+  String namafilegambar = '';
+  List<Merkmodel> xlistmerk = [];
+  int idmerk = 0;
   bool isLoading = false;
+  File? _userImageFile;
+  void _pickedImage(File image) {
+    _userImageFile = image;
+  }
 
   void refreshdata() {
     setState(() {
@@ -27,7 +34,7 @@ class _JenisMerkAdminPageState extends State<JenisMerkAdminPage> {
     });
     MerkDio().listmerk().then((value) {
       setState(() {
-        xlistmerk = value;       
+        xlistmerk = value;
         isLoading = false;
       });
     });
@@ -61,9 +68,7 @@ class _JenisMerkAdminPageState extends State<JenisMerkAdminPage> {
                         onChanged: (value) {
                           setState(() {
                             idmerk = value as int;
-                     
                           });
-                          
                         },
                         items: xlistmerk
                             .map((e) => DropdownMenuItem(
@@ -73,7 +78,7 @@ class _JenisMerkAdminPageState extends State<JenisMerkAdminPage> {
                             .toList(),
                       ),
               ),
-               const SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
                 margin: const EdgeInsets.only(left: 20, right: 20),
                 child: TextFormField(
@@ -90,9 +95,22 @@ class _JenisMerkAdminPageState extends State<JenisMerkAdminPage> {
                   },
                 ),
               ),
-             
+              Container(
+                margin: const EdgeInsets.all(15),
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color.fromARGB(255, 227, 230, 227)),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(height: 5),
+                    UserImagePicker(imagePickFn: _pickedImage),
+                  ],
+                ),
+              ),
               const SizedBox(height: 20),
-               Container(
+              Container(
                 margin: const EdgeInsets.only(left: 20, right: 20),
                 child: TextFormField(
                   controller: gambar,
@@ -100,16 +118,10 @@ class _JenisMerkAdminPageState extends State<JenisMerkAdminPage> {
                     border: OutlineInputBorder(),
                     labelText: 'Gambar',
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your Gambar';
-                    }
-                    return null;
-                  },
+                  enabled: false,
                 ),
               ),
               const SizedBox(height: 20),
-             
               Container(
                 margin: const EdgeInsets.only(left: 20, right: 20),
                 child: Row(
@@ -117,32 +129,43 @@ class _JenisMerkAdminPageState extends State<JenisMerkAdminPage> {
                   children: [
                     ElevatedButton(
                       onPressed: () async {
-                        
-                        final Jenismerkmodel item = Jenismerkmodel(
-                            idmerk: idmerk,                            
-                            keterangan: keterangan.text,
-                            gambar: 'icon.png'
-                            );
                         if (_formKey.currentState!.validate()) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Processing Data')));
+                          Future.delayed(const Duration(seconds: 5), () {
+                            MediaDio()
+                                .uploadmedia(_userImageFile!)
+                                .then((value) {
+                              value["status"] == false
+                                  ? ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                              'Failed, cek kembali data anda')))
+                                  : ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(content: Text('Success')));
+                              setState(() {
+                                gambar.text = value["filename"];
+                              });
+                              final Jenismerkmodel item = Jenismerkmodel(
+                                idmerk: idmerk,
+                                keterangan: keterangan.text,
+                                gambar: value["filename"],
+                              );
 
-                          await MerkDio().postjenismerk(item).then((value) {
-                            value["status"] == false
-                                ? ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text(
-                                            'Failed, cek kembali data anda')))
-                                : ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Success')));
-                                        
-                            Future.delayed(
-                                const Duration(seconds: 1)
-                                // ignore: avoid_types_on_closure_parameters
-                                , () {
-                              Navigator.pop(context);
-
+                        
+                              MerkDio().postjenismerk(item).then((value) {
+                                value["status"] == false
+                                    ? ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                            content: Text(
+                                                'Failed, cek kembali data anda')))
+                                    :
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return const ListJenisMerkAdminPage();
+                                  },
+                                ));
+                              });
                             });
                           });
                         }

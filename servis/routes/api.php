@@ -40,10 +40,12 @@ Route::delete('merk/jenismerkdelete/{id}', [ApiMerk::class, 'jenismerkdelete']);
 
 Route::post('reservasi/store', [ApiReservasi::class, 'store']);
 Route::get('reservasi/listreservasiadmin', [ApiReservasi::class, 'listreservasiadmin']);
+Route::get('reservasi/historyreservasi', [ApiReservasi::class, 'historyreservasi']);
 Route::get('reservasi/listreservasi/{id}', [ApiReservasi::class, 'listreservasi']);
 Route::get('reservasi/listgetreservasi/{id}/{id2}', [ApiReservasi::class, 'listgetreservasi']);
 Route::get('reservasi/show/{id}', [ApiReservasi::class, 'show']);
 Route::delete('reservasi/delete/{id}', [ApiReservasi::class, 'delete']);
+Route::post('reservasi/reservasiselesai', [ApiReservasi::class, 'reservasiselesai']);
 
 Route::post('pelayanan/store', [ApiPelayanan::class, 'store']);
 Route::get('pelayanan/listpelayanan/{id}', [ApiPelayanan::class, 'listpelayanan']);
@@ -55,3 +57,4 @@ Route::post('register', 'App\Http\Controllers\ApiAuthController@register');
 Route::post('apimedia', 'App\Http\Controllers\ApiMedia@store');
 Route::post('login', 'App\Http\Controllers\ApiAuthController@login');
 Route::get('listmekanik', 'App\Http\Controllers\ApiAuthController@listmekanik');
+Route::post('apimedia', 'App\Http\Controllers\ApiMedia@store');
