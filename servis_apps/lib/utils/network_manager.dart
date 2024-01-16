@@ -4,7 +4,7 @@ import "package:servis_apps/models/mekanik.dart";
 
 class NetworkManager {
   late Dio dio;
-  final String baseUrl = "http://192.168.10.254:8000/api";
+  final String baseUrl = "http://okamotor.my.id/api";
 
   NetworkManager() {
     dio = Dio();
@@ -23,6 +23,7 @@ class NetworkManager {
       throw Exception("Exception occured: $e");
     }
   }
+
   Future<List<MekanikModel>> listmekanik() async {
     try {
       final result = await dio.get('$baseUrl/listmekanik');
@@ -33,5 +34,4 @@ class NetworkManager {
       throw Exception("Exception occured: $e");
     }
   }
-
 }

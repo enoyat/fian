@@ -17,7 +17,9 @@ class ItemJenisMerkWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget cancelButton = ElevatedButton(
       child: const Text("Cancel"),
-      onPressed: () {Navigator.of(context).pop(); },
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
     );
     Widget continueButton = ElevatedButton(
       child: const Text("Continue"),
@@ -30,8 +32,7 @@ class ItemJenisMerkWidget extends StatelessWidget {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: const Text("Konfirmasi"),
-      content: const Text(
-          "Hapus data ini?"),
+      content: const Text("Hapus data ini?"),
       actions: [cancelButton, continueButton],
     );
     return Card(
@@ -44,11 +45,11 @@ class ItemJenisMerkWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                 leading: Image.network('http://192.168.10.254:8000/assets/img//${jenismerk.gambar}',
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.cover,
-                  
+                  leading: Image.network(
+                    'http://okamotor.my.id/assets/img//${jenismerk.gambar}',
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
                   ),
                   iconColor: Colors.blue,
                   title: Text(jenismerk.keterangan.toString()),

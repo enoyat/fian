@@ -4,14 +4,14 @@ import "package:servis_apps/models/Motorgetmodel.dart";
 import "package:servis_apps/models/merkmodel.dart";
 import "package:servis_apps/models/motormodel.dart";
 
-class MotorDio   {
+class MotorDio {
   late Dio dio;
-  final String baseUrl = "http://192.168.10.254:8000/api";
+  final String baseUrl = "http://okamotor.my.id/api";
 
   MotorDio() {
     dio = Dio();
   }
-  
+
   Future<List<Motor>> listmotor(int id) async {
     try {
       final result = await dio.get('$baseUrl/motor/listmotor/$id');
@@ -22,6 +22,7 @@ class MotorDio   {
       throw Exception("Exception occured: $e");
     }
   }
+
   Future<List<Motorgetmodel>> listgetmotor(int id) async {
     try {
       final result = await dio.get('$baseUrl/motor/listgetmotor/$id');
@@ -33,8 +34,7 @@ class MotorDio   {
     }
   }
 
-
-Future postmotor(Motor item) async {
+  Future postmotor(Motor item) async {
     try {
       return await dio
           .post(

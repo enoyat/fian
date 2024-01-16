@@ -3,14 +3,14 @@ import "package:dio/dio.dart";
 import "package:servis_apps/models/Pelayanangetmodel.dart";
 import "package:servis_apps/models/pelayananmodel.dart";
 
-class PelayananDio   {
+class PelayananDio {
   late Dio dio;
-  final String baseUrl = "http://192.168.10.254:8000/api";
+  final String baseUrl = "http://okamotor.my.id/api";
 
   PelayananDio() {
     dio = Dio();
   }
-  
+
   Future<List<PelayanangetModel>> listpelayanan(int id) async {
     try {
       final result = await dio.get('$baseUrl/pelayanan/listpelayanan/$id');
@@ -21,6 +21,7 @@ class PelayananDio   {
       throw Exception("Exception occured: $e");
     }
   }
+
   Future<List<PelayanangetModel>> listgetpelayanan() async {
     try {
       final result = await dio.get('$baseUrl/pelayanan/listgetpelayanan');
@@ -32,8 +33,7 @@ class PelayananDio   {
     }
   }
 
-
-Future postpelayanan(PelayananModel item) async {
+  Future postpelayanan(PelayananModel item) async {
     try {
       return await dio
           .post(

@@ -23,13 +23,12 @@ class ItemMotorWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  leading: Image.network('http://192.168.10.254:8000/assets/img//${motor.gambar}',
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.cover,
-                  
-                  ) ,
-                  
+                  leading: Image.network(
+                    'http://okamotor.my.id/assets/img//${motor.gambar}',
+                    width: 50,
+                    height: 50,
+                    fit: BoxFit.cover,
+                  ),
                   iconColor: Colors.blue,
                   title: Text(motor.keterangan.toString()),
                   subtitle: Text(motor.nopolisi.toString()),
@@ -40,7 +39,7 @@ class ItemMotorWidget extends StatelessWidget {
                     icon: const Icon(Icons.refresh),
                   ),
                 ),
-               ],
+              ],
             ),
           ),
         ],

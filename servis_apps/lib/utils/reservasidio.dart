@@ -3,14 +3,14 @@ import "package:dio/dio.dart";
 import "package:servis_apps/models/reservasigetmodel.dart";
 import "package:servis_apps/models/reservasimodel.dart";
 
-class ReservasiDio   {
+class ReservasiDio {
   late Dio dio;
-  final String baseUrl = "http://192.168.10.254:8000/api";
+  final String baseUrl = "http://okamotor.my.id/api";
 
   ReservasiDio() {
     dio = Dio();
   }
-  
+
   Future<List<ReservasiModel>> listreservasi(int id) async {
     try {
       final result = await dio.get('$baseUrl/reservasi/listreservasi/$id');
@@ -21,6 +21,7 @@ class ReservasiDio   {
       throw Exception("Exception occured: $e");
     }
   }
+
   Future<List<ReservasigetModel>> listgetreservasiadmin() async {
     try {
       final result = await dio.get('$baseUrl/reservasi/listreservasiadmin/');
@@ -31,7 +32,8 @@ class ReservasiDio   {
       throw Exception("Exception occured: $e");
     }
   }
-    Future<List<ReservasigetModel>> historyreservasi(String status) async {
+
+  Future<List<ReservasigetModel>> historyreservasi(String status) async {
     try {
       final result = await dio.get('$baseUrl/reservasi/historyreservasi');
       return (result.data as List)
@@ -41,9 +43,12 @@ class ReservasiDio   {
       throw Exception("Exception occured: $e");
     }
   }
-  Future<List<ReservasigetModel>> listgetreservasi(int id, String status) async {
+
+  Future<List<ReservasigetModel>> listgetreservasi(
+      int id, String status) async {
     try {
-      final result = await dio.get('$baseUrl/reservasi/listgetreservasi/$id/$status');
+      final result =
+          await dio.get('$baseUrl/reservasi/listgetreservasi/$id/$status');
       return (result.data as List)
           .map((e) => ReservasigetModel.fromMap(e as Map<String, dynamic>))
           .toList();
@@ -51,6 +56,7 @@ class ReservasiDio   {
       throw Exception("Exception occured: $e");
     }
   }
+
   Future postReservasi(ReservasiModel item) async {
     try {
       final result = await dio.post(
@@ -63,7 +69,8 @@ class ReservasiDio   {
       throw Exception(e);
     }
   }
- Future reservasiselesai(ReservasigetModel item) async {
+
+  Future reservasiselesai(ReservasigetModel item) async {
     try {
       final result = await dio.post(
         "$baseUrl/reservasi/reservasiselesai",
@@ -75,7 +82,6 @@ class ReservasiDio   {
       throw Exception(e);
     }
   }
-
 
   Future<void> delete(ReservasiModel item) async {
     try {

@@ -20,7 +20,6 @@ class ItemReservasiWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            
             child: Container(
               padding: const EdgeInsets.all(10),
               color: Colors.grey[200],
@@ -31,11 +30,11 @@ class ItemReservasiWidget extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text('No. Mekanik = ${reservasi.idmekanik}'), 
+                  Text('No. Mekanik = ${reservasi.idmekanik}'),
                   const SizedBox(
                     height: 5,
                   ),
-                   Text('No. Polisi = ${reservasi.nopolisi}'), 
+                  Text('No. Polisi = ${reservasi.nopolisi}'),
                   const SizedBox(
                     height: 5,
                   ),
@@ -52,19 +51,23 @@ class ItemReservasiWidget extends StatelessWidget {
                     height: 5,
                   ),
                   Image.network(
-                    'http://192.168.10.254:8000/assets/img/${reservasi.gambar}',
+                    'http://okamotor.my.id/assets/img/${reservasi.gambar}',
                     width: 100,
                     height: 100,
-                    ),
-                    Row(
-                      children: [
-                        const Text('Approve Reservasi Selesai: '),
-                        IconButton(onPressed: (){
+                  ),
+                  Row(
+                    children: [
+                      const Text('Approve Reservasi Selesai: '),
+                      IconButton(
+                        onPressed: () {
                           ReservasiDio().reservasiselesai(reservasi);
                           handleRefresh();
-                        }, icon: const Icon(Icons.motorcycle_sharp), color: Colors.green,),
-                      ],
-                    )
+                        },
+                        icon: const Icon(Icons.motorcycle_sharp),
+                        color: Colors.green,
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

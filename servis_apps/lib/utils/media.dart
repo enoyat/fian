@@ -5,7 +5,7 @@ import "package:dio/dio.dart";
 
 class MediaDio {
   late Dio dio;
-  final String baseUrl = "http://192.168.10.254:8000/api";
+  final String baseUrl = "http://okamotor.my.id/api";
 
   MediaDio() {
     dio = Dio();
