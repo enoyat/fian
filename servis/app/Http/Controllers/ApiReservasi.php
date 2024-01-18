@@ -8,6 +8,7 @@ use App\Models\Pelayanan;
 use App\Models\Pendaftaran;
 use App\Models\Reservasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -21,8 +22,9 @@ class ApiReservasi extends Controller
         $motor = new Reservasi();      
         $motor->idpelayanan = $request->idpelayanan;
         $motor->idmekanik = $request->idmekanik;
-        $motor->tglreservasi = $request->tglreservasi;
+        $motor->tglreservasi = Date('Y-m-d', strtotime($request->tglreservasi));
         $motor->jam = $request->jam;
+        $motor->nominal = $request->nominal;
         $motor->statusreservasi = $request->statusreservasi;
         $motor->save();
         $id = $motor->idreservasi;
@@ -39,7 +41,7 @@ class ApiReservasi extends Controller
         $reservasi = Reservasi::join('pelayanan','reservasi.idpelayanan','=','pelayanan.idpelayanan')
         ->join('motor','pelayanan.idmotor','=','motor.idmotor')
         ->join('jenismerk','motor.idjenismerk','=','jenismerk.idjenismerk')
-        ->where('statusreservasi', "baru")
+        ->where('reservasi.statusreservasi', "baru")
         ->get();           
         return Response::json($reservasi);
     }

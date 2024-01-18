@@ -67,7 +67,9 @@ class ItemReservasiHistoryWidget extends StatelessWidget {
                       ),
                     ],
                   ),
+                  Text('Nominal = ${reservasi.nominal}'),
                 ],
+                
               ),
             ),
           ),

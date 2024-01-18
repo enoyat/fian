@@ -28,7 +28,11 @@ class _LoginPageState extends State<LoginPage> {
     await prefs.setInt('userid', userid);
     await prefs.setString('username', username);
     await prefs.setString('email', email);
-    
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() {
+        status = true;
+      });
+    });
   }
 
   @override

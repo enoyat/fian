@@ -12,6 +12,7 @@ class ReservasigetModel {
   final String nopolisi;
   final String keterangan;
   final String gambar;
+  final int nominal;
   ReservasigetModel({
     required this.idreservasi,
     required this.idpelayanan,
@@ -22,6 +23,7 @@ class ReservasigetModel {
     required this.nopolisi,
     required this.keterangan,
     required this.gambar,
+    required this.nominal,
   });
 
   
@@ -37,6 +39,7 @@ class ReservasigetModel {
       'nopolisi': nopolisi,
       'keterangan': keterangan,
       'gambar': gambar,
+      'nominal': nominal,
     };
   }
 
@@ -51,6 +54,7 @@ class ReservasigetModel {
       nopolisi: map['nopolisi'] as String,
       keterangan: map['keterangan'] as String,
       gambar: map['gambar'] as String,
+      nominal: map['nominal'] as int,
     );
   }
 

@@ -4,6 +4,8 @@ import 'package:servis_apps/screen/admin/listjenismerk.dart';
 import 'package:servis_apps/screen/admin/listmerk.dart';
 import 'package:servis_apps/screen/admin/listreservasi.dart';
 import 'package:servis_apps/screen/admin/pelayanan.dart';
+import 'package:servis_apps/screen/admin/reservasi.dart';
+import 'package:servis_apps/screen/pelayanan_page.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login_page.dart';
@@ -181,6 +183,113 @@ class _AdminPageState extends State<AdminPage> {
             const SizedBox(
               height: 20,
             ),
+            GridView.count(
+                            crossAxisCount: 3,
+                            shrinkWrap: true,
+                            children: [
+                              Card(
+                                color: const Color.fromARGB(255, 221, 82, 2),
+                                elevation: 5,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return const ListPelayananAdminPage();
+                                      
+                                    }));
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/jadwala.png',
+                                        width: 60,
+                                        height: 60,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      const Text(
+                                        'Ajuan Layanan',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                color: Color.fromARGB(255, 20, 166, 185),
+                                elevation: 5,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return const ReservasiAdminPage();
+                                      
+                                    }));
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/jadwala.png',
+                                        width: 60,
+                                        height: 60,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      const Text(
+                                        'Reservasi',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                color: Color.fromARGB(255, 83, 235, 129),
+                                elevation: 5,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return const ListReservasiAdminPage();
+                                      
+                                    }));
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/jadwala.png',
+                                        width: 60,
+                                        height: 60,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      const Text(
+                                        'Daftar Reservasi',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ]),
           ],
         ),
       ),

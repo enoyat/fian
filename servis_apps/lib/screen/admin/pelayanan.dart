@@ -9,15 +9,14 @@ class ListPelayananAdminPage extends StatefulWidget {
   const ListPelayananAdminPage({
     Key? key,
   }) : super(key: key);
-  
+
   @override
   State<ListPelayananAdminPage> createState() => _ListPelayananAdminPageState();
 }
 
 class _ListPelayananAdminPageState extends State<ListPelayananAdminPage> {
-
   List<PelayanangetModel> pelayanan = [];
-  
+
   bool isLoading = false;
   int pelayananCount = 0;
   int userid = 0;
@@ -36,7 +35,7 @@ class _ListPelayananAdminPageState extends State<ListPelayananAdminPage> {
   }
 
   @override
-  void initState() {    
+  void initState() {
     refreshData();
     super.initState();
   }
@@ -62,37 +61,75 @@ class _ListPelayananAdminPageState extends State<ListPelayananAdminPage> {
       body: Container(
         padding: const EdgeInsets.all(20),
         width: size.width,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const SizedBox(
-            height: 10,
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children:  [
-              Text(
-                'Daftar Reservasi Pelayanan'
-              ),
-            ],
-          ),
-          isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Expanded(
-                  child: pelayanan.isEmpty
-                      ? const Center(
-                          child: Text('Tidak ada item'),
-                        )
-                      : ListView.builder(
-                          itemCount: pelayanan.length,
-                          itemBuilder: (context, index) {
-                            return ItemPelayananAdminWidget(
-                              pelayanan: pelayanan[index],
-                              handleRefresh: refreshData,
-                            );
-                          }),
-                ),
-        ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Daftar Reservasi Pelayanan'),
+              ],
+            ),
+            isLoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Scrollbar(
+                    thickness: 10,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: pelayanan.isEmpty
+                          ? const Center(
+                              child: Text('Tidak ada item'),
+                            )
+                          : DataTable(
+                              headingRowHeight: 30,
+                              dataRowMinHeight: 20,
+                              dataRowMaxHeight: 30,
+                              border: TableBorder.all(color: Colors.black),
+                              columns: const [
+                                DataColumn(label: Text('No. Reservasi')),
+                                DataColumn(label: Text('No. Polisi')),
+                                DataColumn(label: Text('Status')),
+                                DataColumn(label: Text('Customer')),
+                                DataColumn(label: Text('Layanan 1')),
+                                DataColumn(label: Text('Layanan 2')),
+                                DataColumn(label: Text('Layanan 3')),
+                                DataColumn(label: Text('Layanan 4')),
+                                DataColumn(label: Text('Layanan 5')),
+                                DataColumn(label: Text('Layanan 6')),
+                                DataColumn(label: Text('Layanan 7')),
+                                DataColumn(label: Text('Layanan Lain')),
+                              ],
+                              rows: pelayanan
+                                  .map((e) => DataRow(cells: [
+                                        DataCell(
+                                            Text(e.idpelayanan.toString())),
+                                        DataCell(Text(e.nopolisi.toString())),
+                                        DataCell(
+                                          e.statuspelayanan.toString() ==
+                                                  'baru'
+                                              ? const Text('baru',style: TextStyle(color: Colors.red))
+                                              : const Text('Selesai',style: TextStyle(color: Colors.green)),
+                                            ),
+                                        DataCell(Text(e.iduser.toString())),
+                                        DataCell(Text(e.pelayanan1.toString())),
+                                        DataCell(Text(e.pelayanan2.toString())),
+                                        DataCell(Text(e.pelayanan3.toString())),
+                                        DataCell(Text(e.pelayanan4.toString())),
+                                        DataCell(Text(e.pelayanan5.toString())),
+                                        DataCell(Text(e.pelayanan6.toString())),
+                                        DataCell(Text(e.pelayanan7.toString())),
+                                        DataCell(Text(e.pelayananlain.toString())),
+                                      ]))
+                                  .toList()),
+                    ),
+                  ),
+          ],
+        ),
       ),
     );
   }

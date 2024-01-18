@@ -14,35 +14,32 @@ class ItemPelayananAdminWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(pelayanan.idpelayanan.toString()),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(pelayanan.nopolisi.toString()),
-                                        const SizedBox(
-                      width: 5,
-                    ),
-                    Text(pelayanan.statuspelayanan.toString()),
-                    IconButton(onPressed: (){}, icon: const Icon(Icons.add_task_rounded), color: Colors.red,)
-
-                  ],
-                ),
-              ],
-            ),
+    return Table(
+      children: [
+        
+        TableRow(
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            border: Border.all(color: Colors.black),
+            
           ),
-        ],
-      ),
+          children: [
+          Text(
+            '${pelayanan.idpelayanan}',
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Text(
+            pelayanan.nopolisi,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+                    Text(
+            pelayanan.statuspelayanan,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+
+        ]),
+      ],
+
     );
   }
 }

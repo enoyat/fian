@@ -8,6 +8,7 @@ class ReservasiModel {
   final String tglreservasi;
   final String jam;
   final String statusreservasi;
+  final String nominal;
   ReservasiModel({
     this.idreservasi,
     required this.idpelayanan,
@@ -15,6 +16,7 @@ class ReservasiModel {
     required this.tglreservasi,
     required this.jam,
     required this.statusreservasi,
+    required this.nominal,
   });
 
   Map<String, dynamic> toMap() {
@@ -25,6 +27,7 @@ class ReservasiModel {
       'tglreservasi': tglreservasi,
       'jam': jam,
       'statusreservasi': statusreservasi,
+      'nominal': nominal,
     };
   }
 
@@ -36,6 +39,7 @@ class ReservasiModel {
       tglreservasi: map['tglreservasi'] as String,
       jam: map['jam'] as String,
       statusreservasi: map['statusreservasi'] as String,
+      nominal: map['nominal'] as String,
     );
   }
 

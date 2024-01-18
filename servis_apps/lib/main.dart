@@ -15,7 +15,13 @@ class MyApp extends StatelessWidget {
       title: 'Bengkel Oka Motor App',
       theme: ThemeData(
         primarySwatch: Colors.green,
+        fontFamily: 'Nunito',
+        textTheme:Theme.of(context).textTheme.apply(
+          fontSizeFactor: 0.7,
+          fontSizeDelta: 1.0,
+        ),
       ),
+      
       home: const LoginPage(),
     );
   }

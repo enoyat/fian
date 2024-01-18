@@ -14,34 +14,21 @@ class ItemPelayananWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(pelayanan.idpelayanan.toString()),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(pelayanan.nopolisi.toString()),
-                                        const SizedBox(
-                      width: 5,
-                    ),
-                    Text(pelayanan.statuspelayanan.toString()),
-
-                  ],
-                ),
-              ],
-            ),
+    return Table(
+      children: [
+        TableRow(children: [
+          Text(
+            'No. Pelayanan = ${pelayanan.idpelayanan}',
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
-        ],
-      ),
+          Text(
+            'No. Reservasi = ${pelayanan.nopolisi}',
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ]),
+      ],
+
     );
+ 
   }
 }
