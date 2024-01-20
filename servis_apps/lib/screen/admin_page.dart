@@ -197,6 +197,45 @@ class _AdminPageState extends State<AdminPage> {
                                   onTap: () {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
+                                      return const ListMerkAdminPage();
+                                      
+                                    }));
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/jadwala.png',
+                                        width: 60,
+                                        height: 60,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Container(
+                                        padding: const EdgeInsets.all(5),
+                                        child: const Text(
+                                          'Motor',
+                                          textAlign: TextAlign.center,
+                                          
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                color: const Color.fromARGB(255, 221, 82, 2),
+                                elevation: 5,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
                                       return const ListPelayananAdminPage();
                                       
                                     }));
@@ -210,11 +249,16 @@ class _AdminPageState extends State<AdminPage> {
                                         height: 60,
                                       ),
                                       const SizedBox(height: 10),
-                                      const Text(
-                                        'Ajuan Layanan',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
+                                      Container(
+                                        padding: const EdgeInsets.all(5),
+                                        child: const Text(
+                                          'Merk Jenis Motor',
+                                          textAlign: TextAlign.center,
+                                          
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -222,7 +266,46 @@ class _AdminPageState extends State<AdminPage> {
                                 ),
                               ),
                               Card(
-                                color: Color.fromARGB(255, 20, 166, 185),
+                                color: const Color.fromARGB(255, 221, 82, 2),
+                                elevation: 5,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return const ListPelayananAdminPage();
+                                      
+                                    }));
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/jadwala.png',
+                                        width: 60,
+                                        height: 60,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Container(
+                                        padding: const EdgeInsets.all(5),
+                                        child: const Text(
+                                          'Daftar Ajuan Layanan',
+                                          textAlign: TextAlign.center,
+                                          
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                color: const Color.fromARGB(255, 20, 166, 185),
                                 elevation: 5,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
@@ -245,10 +328,12 @@ class _AdminPageState extends State<AdminPage> {
                                       ),
                                       const SizedBox(height: 10),
                                       const Text(
-                                        'Reservasi',
+                                        'Approve Jadwal Reservasi',
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 12,
                                           fontWeight: FontWeight.bold,
+                                          
                                         ),
                                       ),
                                     ],
@@ -279,9 +364,44 @@ class _AdminPageState extends State<AdminPage> {
                                       ),
                                       const SizedBox(height: 10),
                                       const Text(
-                                        'Daftar Reservasi',
+                                        'Reservasi',
                                         style: TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                color: Color.fromARGB(255, 83, 235, 129),
+                                elevation: 5,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return const HistoryReservasiPage();
+                                      
+                                    }));
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/jadwala.png',
+                                        width: 60,
+                                        height: 60,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      const Text(
+                                        'Daftar History Reservasi',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 12,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),

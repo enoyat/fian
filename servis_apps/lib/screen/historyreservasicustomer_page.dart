@@ -1,27 +1,26 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:servis_apps/models/Pelayanangetmodel.dart';
+import 'package:servis_apps/models/reservasigetmodel.dart';
 import 'package:servis_apps/models/user.dart';
-import 'package:servis_apps/utils/pelayanan_dio.dart';
-import 'package:servis_apps/widget/itempelayanan_widget.dart';
+import 'package:servis_apps/utils/reservasidio.dart';
+import 'package:servis_apps/widget/itemreservasi_widget.dart';
+import 'package:servis_apps/widget/itemreservasihistory_widget.dart';
 
-class ListPelayananPage extends StatefulWidget {
-  const ListPelayananPage({
+class HistoryReservasiCustomerPage extends StatefulWidget {
+  const HistoryReservasiCustomerPage({
     Key? key,
     required this.userid,
   }) : super(key: key);
   final int userid;
 
   @override
-  State<ListPelayananPage> createState() => _ListPelayananPageState();
+  State<HistoryReservasiCustomerPage> createState() => _HistoryReservasiCustomerPageState();
 }
 
-class _ListPelayananPageState extends State<ListPelayananPage> {
-
-  List<PelayanangetModel> pelayanan = [];
-  
+class _HistoryReservasiCustomerPageState extends State<HistoryReservasiCustomerPage> {
+  List<ReservasigetModel> reservasi = [];
   bool isLoading = false;
-  int pelayananCount = 0;
+  int reservasiCount = 0;
   int userid = 0;
   List<User> usermodel = [];
 
@@ -29,9 +28,9 @@ class _ListPelayananPageState extends State<ListPelayananPage> {
     setState(() {
       isLoading = true;
     });
-    await PelayananDio().listpelayanan(widget.userid).then((value) {
+    await ReservasiDio().listgetreservasi(widget.userid,'onproses').then((value) {
       setState(() {
-        pelayanan = value;
+        reservasi = value;
         isLoading = false;
       });
     });
@@ -51,7 +50,7 @@ class _ListPelayananPageState extends State<ListPelayananPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Daftar Ajuan Layanan',
+          'History Reservasi',
           textAlign: TextAlign.left,
           style: TextStyle(color: Colors.black),
         ),
@@ -74,7 +73,7 @@ class _ListPelayananPageState extends State<ListPelayananPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:  [
               Text(
-                'Daftar Ajuan Layanan'
+                'Daftar Reservasi'
               ),
             ],
           ),
@@ -83,15 +82,15 @@ class _ListPelayananPageState extends State<ListPelayananPage> {
                   child: CircularProgressIndicator(),
                 )
               : Expanded(
-                  child: pelayanan.isEmpty
+                  child: reservasi.isEmpty
                       ? const Center(
                           child: Text('Tidak ada item'),
                         )
                       : ListView.builder(
-                          itemCount: pelayanan.length,
+                          itemCount: reservasi.length,
                           itemBuilder: (context, index) {
-                            return ItemPelayananWidget(
-                              pelayanan: pelayanan[index],
+                            return ItemReservasiHistoryWidget(
+                              reservasi: reservasi[index],
                               handleRefresh: refreshData,
                             );
                           }),

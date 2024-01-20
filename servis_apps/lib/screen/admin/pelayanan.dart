@@ -46,7 +46,7 @@ class _ListPelayananAdminPageState extends State<ListPelayananAdminPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Reservasi Pelayanan',
+          'Ajuan Pelayanan',
           textAlign: TextAlign.left,
           style: TextStyle(color: Colors.black),
         ),
@@ -70,7 +70,7 @@ class _ListPelayananAdminPageState extends State<ListPelayananAdminPage> {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Daftar Reservasi Pelayanan'),
+                Text('Daftar Ajuan Pelayanan'),
               ],
             ),
             isLoading

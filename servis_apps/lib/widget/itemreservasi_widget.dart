@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:servis_apps/models/reservasigetmodel.dart';
 import 'package:servis_apps/utils/reservasidio.dart';
 
@@ -55,17 +56,15 @@ class ItemReservasiWidget extends StatelessWidget {
                     width: 100,
                     height: 100,
                   ),
+                  Text('Biaya ${NumberFormat().format(reservasi.nominal)}'),
                   Row(
                     children: [
-                      const Text('Approve Reservasi Selesai: '),
-                      IconButton(
-                        onPressed: () {
-                          ReservasiDio().reservasiselesai(reservasi);
+                      const Text('Approve Reservasi Dikerjakan: '),
+                      ElevatedButton(onPressed: (){
+                          ReservasiDio().reservasionproses(reservasi);
                           handleRefresh();
-                        },
-                        icon: const Icon(Icons.motorcycle_sharp),
-                        color: Colors.green,
-                      ),
+                      },
+                          child: const Text('Approve')),
                     ],
                   )
                 ],

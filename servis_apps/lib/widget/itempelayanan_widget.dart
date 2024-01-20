@@ -15,17 +15,46 @@ class ItemPelayananWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Table(
+      border: TableBorder.all(),
+      columnWidths: const <int, TableColumnWidth>{
+        0: IntrinsicColumnWidth(),
+        1: FlexColumnWidth(),
+        2: FixedColumnWidth(120),
+      },
+      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
       children: [
-        TableRow(children: [
-          Text(
-            'No. Pelayanan = ${pelayanan.idpelayanan}',
-            style: const TextStyle(fontWeight: FontWeight.bold),
+        TableRow(
+
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
           ),
-          Text(
-            'No. Reservasi = ${pelayanan.nopolisi}',
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ]),
+          children: [
+            Container(
+              padding: const EdgeInsets.all(5),
+              height: 30,
+              child: Text(
+                'No.Layanan ${pelayanan.idpelayanan}',
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(5),
+              height: 30,
+              child: Text(
+                'No.Polisi ${pelayanan.nopolisi}',
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(5),
+              height: 30,
+              child: Text(
+                'Status: ${pelayanan.statuspelayanan}',
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
+              ),
+            ),
+          ],
+        ),
       ],
 
     );

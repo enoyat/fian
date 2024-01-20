@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:servis_apps/screen/admin/historyreservasi.dart';
+import 'package:servis_apps/screen/historyreservasicustomer_page.dart';
 import 'package:servis_apps/screen/listmotor_page.dart';
 import 'package:servis_apps/screen/listpelayanan_page.dart';
 import 'package:servis_apps/screen/listreservasipage.dart';
@@ -77,80 +79,63 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: MenuBar(
-                    children: <Widget>[
-                      SubmenuButton(
-                        menuChildren: <Widget>[
-                          MenuItemButton(
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) {
-                                  return ListMotorPage(userid: userid!);
-                                },
-                              ));
-                              // showAboutDialog(
-                              //   context: context,
-                              //   applicationName: 'MenuBar Sample',
-                              //   applicationVersion: '1.0.0',
-                              // );
-                            },
-                            child: const MenuAcceleratorLabel('&Motor'),
-                          ),
-                          MenuItemButton(
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) {
-                                  return RegisterMotor(userid: userid!);
-                                },
-                              ));
-                            },
-                            child:
-                                const MenuAcceleratorLabel('&Registrasi Motor'),
-                          ),
-                        ],
-                        child: const MenuAcceleratorLabel('&Motor'),
-                      ),
-                      SubmenuButton(
-                        menuChildren: <Widget>[
-                          MenuItemButton(
-                            onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) {
-                                  return PelayananPage(userid: userid!);
-                                },
-                              ));
-                            },
-                            child: const MenuAcceleratorLabel('&Reservasi'),
-                          ),
-                          MenuItemButton(
-                            onPressed: () {
-                               Navigator.push(context, MaterialPageRoute(
-                                builder: (context) {
-                                  return  ListPelayananPage(userid: userid!);
-                                },
-                              ));
-                            },
-                            child:
-                                const MenuAcceleratorLabel('&History Layanan'),
-                          ),
-                        ],
-                        child: const MenuAcceleratorLabel('&Layanan'),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+           
+            
             Container(
+              margin: const EdgeInsets.only(top: 5),
+              width: double.infinity,
+              child: Card(                
+                margin: const EdgeInsets.only(top: 5, bottom: 5),
+                color: const Color.fromARGB(255, 3, 68, 17),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 10),
+                    Image(
+                      image: AssetImage('assets/images/logo.png'),
+                      width: 100,
+                      height: 100,
+                    ),
+                    SizedBox(height: 5),
+                    Text('Bengkel Oka Motor',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 196, 190, 190),
+                        )),
+                    SizedBox(height: 5),
+                    Text('Jl. Raya Puputan No. 86, Renon, Denpasar',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 196, 190, 190),
+                        ),
+                        textAlign: TextAlign.center),
+                    SizedBox(height: 5),
+                    Text('Telp. 0361-234567',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 196, 190, 190),
+                        ),
+                        textAlign: TextAlign.center),
+                    SizedBox(height: 10),
+                    
+                  ],
+                  
+                ),
+              ),
+            ),
+          Container(
               margin: const EdgeInsets.only(top: 5),
               height: 120,
               width: double.infinity,
               child: Card(
                 margin: const EdgeInsets.only(top: 5, bottom: 5),
-                color: Color.fromARGB(255, 218, 98, 12),
+                color: const Color.fromARGB(255, 217, 219, 224),
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -163,13 +148,13 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 196, 190, 190),
+                          color: Colors.black,
                         )),
                     const SizedBox(height: 5),
                     const Text('Bengkel Oka Motor',
                         style: TextStyle(
                           fontSize: 15,
-                          color: Color.fromARGB(255, 196, 190, 190),
+                          color: Colors.black,
                         ),
                         textAlign: TextAlign.center),
                     const SizedBox(height: 5),
@@ -178,61 +163,10 @@ class _HomePageState extends State<HomePage> {
                         : Text("ID :$userid - ${username!}",
                             style: const TextStyle(
                               fontSize: 15,
-                              color: Color.fromARGB(255, 196, 190, 190),
+                              color: Colors.black,
                             ),
                             textAlign: TextAlign.center),
                   ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(top: 5),
-                width: double.infinity,
-                child: Card(
-                  margin: const EdgeInsets.only(top: 5, bottom: 5),
-                  
-                  color: const Color.fromARGB(255, 3, 68, 17),
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    
-                  ),
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage('assets/images/logo.png'),
-                        width: 100,
-                        height: 100,
-                      ),
-                      SizedBox(height: 5),
-                      Text('Bengkel Oka Motor',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 196, 190, 190),
-                          )),
-                      SizedBox(height: 5),
-                      Text('Jl. Raya Puputan No. 86, Renon, Denpasar',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Color.fromARGB(255, 196, 190, 190),
-                          ),
-                          textAlign: TextAlign.center),
-                      SizedBox(height: 5),
-                      Text('Telp. 0361-234567',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Color.fromARGB(255, 196, 190, 190),
-                          ),
-                          textAlign: TextAlign.center),
-                    ],
-                  ),
                 ),
               ),
             ),
@@ -250,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                                   onTap: () {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
-                                      return const ListPelayananAdminPage();
+                                      return ListMotorPage(userid: userid!);
                                       
                                     }));
                                   },
@@ -264,9 +198,9 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       const SizedBox(height: 10),
                                       const Text(
-                                        'Ajuan Layanan',
+                                        'Motor',
                                         style: TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 12,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -284,7 +218,109 @@ class _HomePageState extends State<HomePage> {
                                   onTap: () {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
-                                      return const ReservasiAdminPage();
+                                      return RegisterMotor(userid: userid!,);
+                                      
+                                    }));
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/jadwala.png',
+                                        width: 60,
+                                        height: 60,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      const Text(
+                                        'Registrasi Motor',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                color: const Color.fromARGB(255, 83, 235, 129),
+                                elevation: 5,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                          return PelayananPage(userid: userid!);
+                                      
+                                    }));
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/jadwala.png',
+                                        width: 60,
+                                        height: 60,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      const Text(
+                                        'Ajuan Layanan',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                color: const Color.fromARGB(255, 83, 235, 129),
+                                elevation: 5,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                          return ListPelayananPage(userid: userid!);
+                                      
+                                    }));
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/jadwala.png',
+                                        width: 60,
+                                        height: 60,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      const Text(
+                                        'Daftar Ajuan Layanan',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                color: const Color.fromARGB(255, 201, 25, 236),
+                                elevation: 5,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                          return ListReservasiPage(userid: userid!);
                                       
                                     }));
                                   },
@@ -300,7 +336,7 @@ class _HomePageState extends State<HomePage> {
                                       const Text(
                                         'Reservasi',
                                         style: TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 12,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -309,7 +345,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Card(
-                                color: Color.fromARGB(255, 83, 235, 129),
+                                color: const Color.fromARGB(255, 201, 25, 236),
                                 elevation: 5,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
@@ -318,7 +354,7 @@ class _HomePageState extends State<HomePage> {
                                   onTap: () {
                                     Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
-                                      return const ListReservasiPage();
+                                          return HistoryReservasiCustomerPage(userid: userid!);
                                       
                                     }));
                                   },
@@ -332,9 +368,9 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       const SizedBox(height: 10),
                                       const Text(
-                                        'Daftar Reservasi',
+                                        'History Reservasi',
                                         style: TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 12,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),

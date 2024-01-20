@@ -1,5 +1,8 @@
-import 'package:servis_apps/screen/login_page.dart';
+import 'package:servis_apps/screen/admin_page.dart';
+import 'package:servis_apps/screen/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:servis_apps/screen/splashscreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,19 +13,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Bengkel Oka Motor App',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        fontFamily: 'Nunito',
-        textTheme:Theme.of(context).textTheme.apply(
-          fontSizeFactor: 0.7,
-          fontSizeDelta: 1.0,
-        ),
-      ),
-      
-      home: const LoginPage(),
+    return FutureBuilder(
+      future: SharedPreferences.getInstance(),
+      builder: (BuildContext context, AsyncSnapshot<SharedPreferences> prefs) {
+          return const MaterialApp(home: SplashScreenPage());
+      },
     );
   }
 }

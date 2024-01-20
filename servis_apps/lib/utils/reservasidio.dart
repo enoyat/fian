@@ -83,6 +83,18 @@ class ReservasiDio {
     }
   }
 
+  Future reservasionproses(ReservasigetModel item) async {
+    try {
+      final result = await dio.post(
+        "$baseUrl/reservasi/reservasionproses",
+        data: item.toMap(),
+      );
+
+      return result.data;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
   Future<void> delete(ReservasiModel item) async {
     try {
       final result = await dio.delete(

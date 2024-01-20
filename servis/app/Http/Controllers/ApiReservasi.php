@@ -85,4 +85,11 @@ class ApiReservasi extends Controller
                 'statuspelayanan' => "finish"]);
         return Response::json($reservasi);
     }
+    public function reservasionproses(Request $request){
+        $reservasi = Reservasi::where('idreservasi',$request->idreservasi)->update([
+            'statusreservasi' => "onproses"]);
+            Pelayanan::where('idpelayanan',$request->idpelayanan)->update([
+                'statuspelayanan' => "onproses"]);
+        return Response::json($reservasi);
+    }
 }

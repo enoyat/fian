@@ -21,11 +21,13 @@ class _LoginPageState extends State<LoginPage> {
   var password = '';
   var username = '';
   var userid = 0;
+  var rolesid = 0;
   bool status = false;
 
   _setter() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('userid', userid);
+    await prefs.setInt('rolesid', rolesid);
     await prefs.setString('username', username);
     await prefs.setString('email', email);
     Future.delayed(const Duration(seconds: 1), () {
@@ -94,7 +96,8 @@ class _LoginPageState extends State<LoginPage> {
                                     setState(() {
                                       userid = value["data"][0]["id"];
                                       username= value["data"][0]["name"];
-                                      email = value["data"][0]["email"];                                     
+                                      email = value["data"][0]["email"];    
+                                      rolesid = value["data"][0]["roles_id"];                                 
                                       
                                       _setter();
                                     }),

@@ -46,6 +46,7 @@ Route::get('reservasi/listgetreservasi/{id}/{id2}', [ApiReservasi::class, 'listg
 Route::get('reservasi/show/{id}', [ApiReservasi::class, 'show']);
 Route::delete('reservasi/delete/{id}', [ApiReservasi::class, 'delete']);
 Route::post('reservasi/reservasiselesai', [ApiReservasi::class, 'reservasiselesai']);
+Route::post('reservasi/reservasionproses', [ApiReservasi::class, 'reservasionproses']);
 
 Route::post('pelayanan/store', [ApiPelayanan::class, 'store']);
 Route::get('pelayanan/listpelayanan/{id}', [ApiPelayanan::class, 'listpelayanan']);
