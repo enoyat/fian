@@ -41,7 +41,7 @@ class ApiReservasi extends Controller
         $reservasi = Reservasi::join('pelayanan','reservasi.idpelayanan','=','pelayanan.idpelayanan')
         ->join('motor','pelayanan.idmotor','=','motor.idmotor')
         ->join('jenismerk','motor.idjenismerk','=','jenismerk.idjenismerk')
-        ->where('reservasi.statusreservasi', "baru")
+        ->where('reservasi.statusreservasi', "onproses")
         ->get();           
         return Response::json($reservasi);
     }
