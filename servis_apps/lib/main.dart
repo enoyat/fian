@@ -1,5 +1,3 @@
-import 'package:servis_apps/screen/admin_page.dart';
-import 'package:servis_apps/screen/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:servis_apps/screen/splashscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +14,7 @@ class MyApp extends StatelessWidget {
     return FutureBuilder(
       future: SharedPreferences.getInstance(),
       builder: (BuildContext context, AsyncSnapshot<SharedPreferences> prefs) {
-          return const MaterialApp(home: SplashScreenPage());
+        return const MaterialApp(home: SplashScreenPage());
       },
     );
   }

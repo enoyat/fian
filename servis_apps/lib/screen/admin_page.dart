@@ -30,14 +30,11 @@ class _AdminPageState extends State<AdminPage> {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const AdminPage();
       }));
-    
-     } else if (index == 1) {
+    } else if (index == 1) {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const ListReservasiAdminPage();
       }));
-    } 
-    
-     else if (index == 2) {
+    } else if (index == 2) {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       await preferences.clear();
       if (!mounted) return;
@@ -68,7 +65,7 @@ class _AdminPageState extends State<AdminPage> {
   @override
   void initState() {
     _setter();
-   
+
     super.initState();
   }
 
@@ -80,65 +77,6 @@ class _AdminPageState extends State<AdminPage> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: MenuBar(
-                    children: <Widget>[
-                      SubmenuButton(
-                        menuChildren: <Widget>[
-                          MenuItemButton(
-                            onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const ListMerkAdminPage();
-                              }));                            
-                            },
-                            child: const MenuAcceleratorLabel('&Merk Motor'),
-                          ),
-                          MenuItemButton(
-                            onPressed: () {
-                               Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const ListJenisMerkAdminPage();
-                              })); 
-                             
-                            },
-                            child:
-                                const MenuAcceleratorLabel('&Jenis Merk Motor'),
-                          ),
-                        ],
-                        child: const MenuAcceleratorLabel('&Master'),
-                      ),
-                      SubmenuButton(
-                        menuChildren: <Widget>[
-                          MenuItemButton(
-                            onPressed: () {
-                               Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const ListPelayananAdminPage();
-                              })); 
-                            },
-                            child: const MenuAcceleratorLabel('&Pelayanan'),
-                          ),
-                          MenuItemButton(
-                            onPressed: () {
-                               Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const HistoryReservasiPage();
-                              })); 
-                            },
-                            child:
-                                const MenuAcceleratorLabel('&Reservasi Motor'),
-                          ),
-                        ],
-                        child: const MenuAcceleratorLabel('&Layanan'),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
             Container(
               margin: const EdgeInsets.only(top: 5),
               height: 120,
@@ -183,233 +121,220 @@ class _AdminPageState extends State<AdminPage> {
             const SizedBox(
               height: 20,
             ),
-            GridView.count(
-                            crossAxisCount: 3,
-                            shrinkWrap: true,
-                            children: [
-                              Card(
-                                color: const Color.fromARGB(255, 221, 82, 2),
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return const ListMerkAdminPage();
-                                      
-                                    }));
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/jadwala.png',
-                                        width: 60,
-                                        height: 60,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Container(
-                                        padding: const EdgeInsets.all(5),
-                                        child: const Text(
-                                          'Motor',
-                                          textAlign: TextAlign.center,
-                                          
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                color: const Color.fromARGB(255, 221, 82, 2),
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return const ListPelayananAdminPage();
-                                      
-                                    }));
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/jadwala.png',
-                                        width: 60,
-                                        height: 60,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Container(
-                                        padding: const EdgeInsets.all(5),
-                                        child: const Text(
-                                          'Merk Jenis Motor',
-                                          textAlign: TextAlign.center,
-                                          
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                color: const Color.fromARGB(255, 221, 82, 2),
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return const ListPelayananAdminPage();
-                                      
-                                    }));
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/jadwala.png',
-                                        width: 60,
-                                        height: 60,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Container(
-                                        padding: const EdgeInsets.all(5),
-                                        child: const Text(
-                                          'Daftar Ajuan Layanan',
-                                          textAlign: TextAlign.center,
-                                          
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                color: const Color.fromARGB(255, 20, 166, 185),
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return const ReservasiAdminPage();
-                                      
-                                    }));
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/jadwala.png',
-                                        width: 60,
-                                        height: 60,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      const Text(
-                                        'Approve Jadwal Reservasi',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                          
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                color: Color.fromARGB(255, 83, 235, 129),
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return const ListReservasiAdminPage();
-                                      
-                                    }));
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/jadwala.png',
-                                        width: 60,
-                                        height: 60,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      const Text(
-                                        'Reservasi',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                color: Color.fromARGB(255, 83, 235, 129),
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return const HistoryReservasiPage();
-                                      
-                                    }));
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/jadwala.png',
-                                        width: 60,
-                                        height: 60,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      const Text(
-                                        'Daftar History Reservasi',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ]),
+            GridView.count(crossAxisCount: 3, shrinkWrap: true, children: [
+              Card(
+                color: const Color.fromARGB(255, 221, 82, 2),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const ListMerkAdminPage();
+                    }));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/jadwala.png',
+                        width: 60,
+                        height: 60,
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        padding: const EdgeInsets.all(5),
+                        child: const Text(
+                          'Motor',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                color: const Color.fromARGB(255, 221, 82, 2),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const ListJenisMerkAdminPage();
+                    }));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/jadwala.png',
+                        width: 60,
+                        height: 60,
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        padding: const EdgeInsets.all(5),
+                        child: const Text(
+                          'Merk Jenis Motor',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                color: const Color.fromARGB(255, 221, 82, 2),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const ListPelayananAdminPage();
+                    }));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/jadwala.png',
+                        width: 60,
+                        height: 60,
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        padding: const EdgeInsets.all(5),
+                        child: const Text(
+                          'Daftar Ajuan Layanan',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                color: const Color.fromARGB(255, 20, 166, 185),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const ReservasiAdminPage();
+                    }));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/jadwala.png',
+                        width: 60,
+                        height: 60,
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Approve Jadwal Reservasi',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                color: Color.fromARGB(255, 83, 235, 129),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const ListReservasiAdminPage();
+                    }));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/jadwala.png',
+                        width: 60,
+                        height: 60,
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Reservasi',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                color: Color.fromARGB(255, 83, 235, 129),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const HistoryReservasiPage();
+                    }));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/jadwala.png',
+                        width: 60,
+                        height: 60,
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Daftar History Reservasi',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ]),
           ],
         ),
       ),
@@ -424,11 +349,10 @@ class _AdminPageState extends State<AdminPage> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-            BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.list_alt_outlined),
             label: 'Reservasi',
           ),
-        
           BottomNavigationBarItem(
             icon: Icon(Icons.logout),
             label: 'Logout',
