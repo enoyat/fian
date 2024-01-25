@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:servis_apps/models/reservasigetmodel.dart';
 import 'package:servis_apps/screen/admin/reservasi.dart';
 import 'package:servis_apps/utils/reservasidio.dart';
-import 'package:servis_apps/widget/itemreservasi_widget.dart';
+import 'package:servis_apps/widget/itemreservasiadmin_widget.dart';
 
 class ListReservasiAdminPage extends StatefulWidget {
   const ListReservasiAdminPage({
@@ -49,7 +49,6 @@ class _ListReservasiAdminPageState extends State<ListReservasiAdminPage> {
           style: TextStyle(color: Colors.white70),
         ),
         actions: [
-
           IconButton(
               onPressed: () {
                 refreshData();
@@ -57,15 +56,6 @@ class _ListReservasiAdminPageState extends State<ListReservasiAdminPage> {
               icon: const Icon(Icons.refresh))
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const ReservasiAdminPage();
-          }));
-        },
-        child: const Icon(Icons.add),
-      ),
-      
       body: Container(
         padding: const EdgeInsets.all(20),
         width: size.width,
@@ -94,7 +84,7 @@ class _ListReservasiAdminPageState extends State<ListReservasiAdminPage> {
                       : ListView.builder(
                           itemCount: reservasi.length,
                           itemBuilder: (context, index) {
-                            return ItemReservasiWidget(
+                            return ItemReservasiAdminWidget(
                               reservasi: reservasi[index],
                               handleRefresh: refreshData,
                             );
