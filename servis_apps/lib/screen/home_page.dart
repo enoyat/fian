@@ -54,13 +54,13 @@ class _HomePageState extends State<HomePage> {
       isLoading = true;
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    Future.delayed(const Duration(seconds: 2));
-    setState(() {
-      userid = prefs.getInt('userid');
-      username = prefs.getString('username');
-      email = prefs.getString('email');
-
-      isLoading = false;
+    Future.delayed(const Duration(seconds: 2)).then((_) async {
+      setState(() {
+        username = prefs.getString('username');
+        email = prefs.getString('email');
+        userid = prefs.getInt('userid');
+        isLoading = false;
+      });
     });
   }
 
@@ -79,12 +79,10 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-           
-            
             Container(
               margin: const EdgeInsets.only(top: 5),
               width: double.infinity,
-              child: Card(                
+              child: Card(
                 margin: const EdgeInsets.only(top: 5, bottom: 5),
                 color: const Color.fromARGB(255, 3, 68, 17),
                 elevation: 5,
@@ -123,13 +121,11 @@ class _HomePageState extends State<HomePage> {
                         ),
                         textAlign: TextAlign.center),
                     SizedBox(height: 10),
-                    
                   ],
-                  
                 ),
               ),
             ),
-          Container(
+            Container(
               margin: const EdgeInsets.only(top: 5),
               height: 120,
               width: double.infinity,
@@ -170,215 +166,208 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-          GridView.count(
-                            crossAxisCount: 3,
-                            shrinkWrap: true,
-                            children: [
-                              Card(
-                                color: const Color.fromARGB(255, 221, 82, 2),
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return ListMotorPage(userid: userid!);
-                                      
-                                    }));
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/jadwala.png',
-                                        width: 60,
-                                        height: 60,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      const Text(
-                                        'Motor',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                color: Color.fromARGB(255, 20, 166, 185),
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return RegisterMotor(userid: userid!,);
-                                      
-                                    }));
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/jadwala.png',
-                                        width: 60,
-                                        height: 60,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      const Text(
-                                        'Registrasi Motor',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                color: const Color.fromARGB(255, 83, 235, 129),
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return PelayananPage(userid: userid!);
-                                      
-                                    }));
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/jadwala.png',
-                                        width: 60,
-                                        height: 60,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      const Text(
-                                        'Ajuan Layanan',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                color: const Color.fromARGB(255, 83, 235, 129),
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return ListPelayananPage(userid: userid!);
-                                      
-                                    }));
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/jadwala.png',
-                                        width: 60,
-                                        height: 60,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      const Text(
-                                        'Daftar Ajuan Layanan',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                color: const Color.fromARGB(255, 201, 25, 236),
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return ListReservasiPage(userid: userid!);
-                                      
-                                    }));
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/jadwala.png',
-                                        width: 60,
-                                        height: 60,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      const Text(
-                                        'Reservasi',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                color: const Color.fromARGB(255, 201, 25, 236),
-                                elevation: 5,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return HistoryReservasiCustomerPage(userid: userid!);
-                                      
-                                    }));
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/jadwala.png',
-                                        width: 60,
-                                        height: 60,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      const Text(
-                                        'History Reservasi',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ]),
+            GridView.count(crossAxisCount: 3, shrinkWrap: true, children: [
+              Card(
+                color: const Color.fromARGB(255, 221, 82, 2),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ListMotorPage(userid: userid!);
+                    }));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/jadwala.png',
+                        width: 60,
+                        height: 60,
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Motor',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                color: Color.fromARGB(255, 20, 166, 185),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return RegisterMotor(
+                        userid: userid!,
+                      );
+                    }));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/jadwala.png',
+                        width: 60,
+                        height: 60,
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Registrasi Motor',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                color: const Color.fromARGB(255, 83, 235, 129),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return PelayananPage(userid: userid!);
+                    }));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/jadwala.png',
+                        width: 60,
+                        height: 60,
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Ajuan Layanan',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                color: const Color.fromARGB(255, 83, 235, 129),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ListPelayananPage(userid: userid!);
+                    }));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/jadwala.png',
+                        width: 60,
+                        height: 60,
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Daftar Ajuan Layanan',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                color: const Color.fromARGB(255, 201, 25, 236),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ListReservasiPage(userid: userid!);
+                    }));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/jadwala.png',
+                        width: 60,
+                        height: 60,
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Reservasi',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Card(
+                color: const Color.fromARGB(255, 201, 25, 236),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return HistoryReservasiCustomerPage(userid: userid!);
+                    }));
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/jadwala.png',
+                        width: 60,
+                        height: 60,
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'History Reservasi',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ]),
           ],
         ),
       ),
