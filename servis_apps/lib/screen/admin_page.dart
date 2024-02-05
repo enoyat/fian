@@ -5,7 +5,6 @@ import 'package:servis_apps/screen/admin/listmerk.dart';
 import 'package:servis_apps/screen/admin/listreservasi.dart';
 import 'package:servis_apps/screen/admin/pelayanan.dart';
 import 'package:servis_apps/screen/admin/reservasi.dart';
-import 'package:servis_apps/screen/pelayanan_page.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login_page.dart';
@@ -52,13 +51,13 @@ class _AdminPageState extends State<AdminPage> {
       isLoading = true;
     });
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    Future.delayed(const Duration(seconds: 2));
-    setState(() {
-      userid = prefs.getInt('userid');
-      username = prefs.getString('username');
-      email = prefs.getString('email');
-
-      isLoading = false;
+    Future.delayed(const Duration(seconds: 2)).then((_) async {
+      setState(() {
+        username = prefs.getString('username');
+        email = prefs.getString('email');
+        userid = prefs.getInt('userid');
+        isLoading = false;
+      });
     });
   }
 
