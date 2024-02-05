@@ -28,7 +28,7 @@ class _HistoryReservasiCustomerPageState extends State<HistoryReservasiCustomerP
     setState(() {
       isLoading = true;
     });
-    await ReservasiDio().listgetreservasi(widget.userid,'onproses').then((value) {
+    await ReservasiDio().listgetreservasi(widget.userid,'finish').then((value) {
       setState(() {
         reservasi = value;
         isLoading = false;

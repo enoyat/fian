@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:servis_apps/models/reservasigetmodel.dart';
+import 'package:servis_apps/screen/nota_page.dart';
 
 class ItemReservasiHistoryWidget extends StatelessWidget {
   const ItemReservasiHistoryWidget({
@@ -68,6 +69,10 @@ class ItemReservasiHistoryWidget extends StatelessWidget {
                     ],
                   ),
                   Text('Nominal = ${reservasi.nominal}'),
+                  IconButton(onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>  NotaPage(reservasi: reservasi)));
+
+                  }, icon: const Icon(Icons.print))
                 ],
                 
               ),
