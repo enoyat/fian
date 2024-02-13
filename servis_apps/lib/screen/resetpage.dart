@@ -57,7 +57,7 @@ class _ResetPageState extends State<ResetPage> {
                     }
                     return null;
                   },
-                  decoration: const InputDecoration(labelText: 'Token'),
+                  decoration: const InputDecoration(labelText: 'Token (cek email)'),
                   onSaved: (value) {
                     token = value!;
                   },
